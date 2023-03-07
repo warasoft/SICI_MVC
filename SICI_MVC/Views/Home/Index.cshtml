@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<style type="text/css">
+    .boton_personalizado {
+        text-decoration: none;
+        padding: 10px;
+        font-weight: 600;
+        font-size: 20px;
+        color: #ffffff;
+        background-color: #1883ba;
+        border-radius: 6px;
+        border: 2px solid #0016b0;
+    }
+</style>
+
+<style type="text/css">
+    .boton_2 {
+        text-decoration: none;
+        padding: 40px;
+        font-family: arial;
+        text-transform: uppercase;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-weight: 800;
+        font-size: 25px;
+        color: black;
+        background-color: #9b0e0e;
+    }
+
+        .boton_2:hover {
+            color: #9b0e0e;
+            background-color: #bc6355;
+            text-decoration: none;
+        }
+</style>
+
+<div class="row">
+        <div class="col-md-12" style="background-color:silver">
+            <h1>SICI</h1>
+            <p style="font-size:x-large">Sistema Integrado de Consulta de Inventarios de la Armada Argentina.</p>
+        </div>
+        <p>&nbsp</p>
+
+            <div class="col-md-4" style="background-color:beige">
+                <h2>Responsable DGMN</h2>
+                <p>Inventario del Material de la Armada.</p>
+                <p>@Html.ActionLink("CONSULTAS >>", "Principal_DGMN", "Home", null, new { @class = "btn btn-info" })</p>
+            </div>
+            <div class="col-md-4" style="background-color:lavender">
+                <h2>Responsable SGNA</h2>
+                <p>Patrimonio Histórico-Cultural de la Armada.</p>
+                <p>@Html.ActionLink("CONSULTAS >>", "Amortizaciones_Anuales", "Home", null, new { @class = "btn btn-info" })</p>
+            </div>
+            <div class="col-md-4" style="background-color:bisque">
+                <h2>Responsable DGSA</h2>
+                <p>Inventario del Material de Sanidad de la Armada.</p>
+                <p>@Html.ActionLink("CONSULTAS >>", "Amortizaciones_Anuales", "Home", null, new { @class = "btn btn-info" })</p>
+            </div>
+            <div class="col-md-4" style="background-color:pink">
+                <h2>Responsable SIHN</h2>
+                <p>Inventario de Hdrografía Naval de la Armada.</p>
+                <p>@Html.ActionLink("CONSULTAS >>", "Amortizaciones_Anuales", "Home", null, new { @class = "btn btn-info" })</p>
+            </div>
+            <div class="col-md-4" style="background-color:gainsboro">
+                <h2>Responsable DIAB</h2>
+                <p>Inventario de Abastecimiento de la Armada.</p>
+                <p>@Html.ActionLink("CONSULTAS >>", "Amortizaciones_Anuales", "Home", null, new { @class = "btn btn-info" })</p>
+            </div>
+            <div class="col-md-4" style="background-color:thistle">
+                <h2>Responsable SIEC</h2>
+                <p>Inventario de Licencias de Software de la Armada.</p>
+                <p>@Html.ActionLink("CONSULTAS >>", "Amortizaciones_Anuales", "Home", null, new { @class = "btn btn-info" })</p>
+            </div>
+            <div class="col-md-4" style="background-color:burlywood">
+                <h2>Responsable JEMA</h2>
+                <p>Inventario de Repuestos de la Armada.</p>
+                <p>@Html.ActionLink("CONSULTAS >>", "Amortizaciones_Anuales", "Home", null, new { @class = "btn btn-info" })</p>
+            </div>
+            <div class="col-md-4" style="background-color:khaki">
+                <h2>Responsable DIAB</h2>
+                <p>Inventario de Víveres de la Armada.</p>
+                <p>@Html.ActionLink("CONSULTAS >>", "Amortizaciones_Anuales", "Home", null, new { @class = "btn btn-info" })</p>
+            </div>
+            <div class="col-md-4" style="background-color:blanchedalmond">
+                <h2>Responsable DIAE</h2>
+                <p>Inventario de Municiones de la Armada.</p>
+                <p>@Html.ActionLink("CONSULTAS >>", "Amortizaciones_Anuales", "Home", null, new { @class = "btn btn-info" })</p>
+            </div>
+    </div>

@@ -1,0 +1,127 @@
+﻿@model SICI_MVC.Models.SIGMA.Altas_Totalizadas_Pagina
+
+@{
+    ViewBag.Title = "Altas Totalizadas";
+    List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
+}
+
+<p></p>
+
+@using (Html.BeginForm("Altas_Totalizadas", "Home", FormMethod.Post))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading text-center">
+            <strong>ALTAS TOTALIZADAS PARA UN INVENTARIO DE EFECTOS DETERMINADO EN UN RANGO DE FECHAS DE ALTA</strong>
+        </div>
+        <div class="panel-body" style="text-align:center">
+            <div class="form-inline">
+                @Html.Label("INVENTARIO: ")
+                @Html.DropDownList("cboInventario", items, "SELECCIONE", new { @class = "form-control", @style = "width:600px;" })
+                @Html.Label("     ")
+                @Html.Label("AÑO DESDE: ")
+                @Html.TextBox("txtAÑO_DESDE", "", new { @class = "form-control", @type = "number", @style = "width:100px;" })
+                @Html.Label("     ")
+                @Html.Label("AÑO HASTA: ")
+                @Html.TextBox("txtAÑO_HASTA", "", new { @class = "form-control", @type = "number", @style = "width:100px;" })
+                <button type="submit" class="btn btn-info">Buscar</button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model.Altas_Totalizadas != null)
+{
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th class="text-center">
+            @Html.DisplayName("AÑO")
+            <br />
+            @Html.DisplayName("ALTA")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("TOTAL")
+            <br />
+            @Html.DisplayName("PRESUPUESTARIAS")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("TOTAL")
+            <br />
+            @Html.DisplayName("NO PRESUPUESTARIAS")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("TOTAL")
+            <br />
+            @Html.DisplayName("DONACION")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("TOTAL")
+            <br />
+            @Html.DisplayName("TRANSFERENCIAS")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("TOTAL")
+            <br />
+            @Html.DisplayName("GENERAL")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("TOTAL")
+            <br />
+            @Html.DisplayName("VALORIZADO")
+        </th>
+    </tr>
+
+    @for (int i = 0; i < Model.Altas_Totalizadas.Count; i++)
+    {
+        <tr>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Altas_Totalizadas[i].Año_Alta)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Altas_Totalizadas[i].Total_Altas_Presupuestarias)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Altas_Totalizadas[i].Total_Altas_No_Presupuestarias)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Altas_Totalizadas[i].Total_Altas_Donacion)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Altas_Totalizadas[i].Total_Altas_Transferencia)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Altas_Totalizadas[i].Total_Altas_General)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Altas_Totalizadas[i].Total_Valorizado)
+            </td>
+        </tr>
+    }
+
+</table>
+
+    if (Model.Altas_Totalizadas.Count > 0)
+    {
+        Html.RenderPartial("_paginador", Model);
+    }
+}
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success text-center">
+        <strong>@ViewBag.Mensaje</strong>
+    </div>
+}
+
+@if (ViewBag.Resultado != null)
+{
+    <div class="alert alert-info text-center">
+        <strong>@ViewBag.Resultado</strong>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-warning text-center">
+        <strong>@ViewBag.Error</strong>
+    </div>
+}

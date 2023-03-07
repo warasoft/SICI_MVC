@@ -1,0 +1,104 @@
+﻿@model SICI_MVC.Models.Peliculas_Pagina
+
+@{
+    ViewBag.Title = "Peliculas Pais";
+}
+
+<p></p>
+
+@using (Html.BeginForm("Peliculas_Pais", "Home", FormMethod.Post))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading text-center">
+            <strong>Listado de Películas por País - Año - Fecha de Estreno</strong>
+        </div>
+        <div class="panel-body" style="text-align:center">
+            <div class="form-inline">
+                @Html.Label("PAIS: ")
+                @Html.TextBox("txtPAIS", "", new { @class = "form-control", @maxLength = "2", @style = "width:100px;" })
+                @Html.Label("     ")
+                @Html.Label("AÑO: ")
+                @Html.TextBox("txtAÑO", "", new { @class = "form-control", @type = "number", @style = "width:100px;" })
+                @Html.Label("     ")
+                @Html.Label("DESDE: ")
+                @Html.TextBox("txtFECHA_DESDE", "", new { @class = "form-control date-picker", @maxLength = "10", @type = "date", @style = "width:180px;" })
+                @Html.Label("     ")
+                @Html.Label("HASTA: ")
+                @Html.TextBox("txtFECHA_HASTA", "", new { @class = "form-control date-picker", @type = "date", @maxLength = "10", @style = "width:180px;" })
+                <button type="submit" class="btn btn-info">Buscar</button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model != null)
+{
+    <table class="table table-bordered table-striped table-hover">
+        <tr>
+            <th class="text-center">
+                @Html.DisplayName("TITULO")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("GENERO")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("AÑO")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("DURACION")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("CODIGO")
+                <br />
+                @Html.DisplayName("PAIS")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("DESCRIPCION")
+                <br />
+                @Html.DisplayName("PAIS")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("FECHA")
+                <br />
+                @Html.DisplayName("ESTRENO")
+            </th>
+        </tr>
+
+
+        @for (int i = 0; i < Model.Peliculas.Count; i++)
+        {
+            <tr>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => Model.Peliculas[i].Titulo)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => Model.Peliculas[i].Genero)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => Model.Peliculas[i].Año)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => Model.Peliculas[i].Duracion)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => Model.Peliculas[i].Cod_Pais)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => Model.Peliculas[i].Des_Pais)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => Model.Peliculas[i].Fecha_Estreno)
+                </td>
+            </tr>
+        }
+    </table>
+
+    if (Model.Peliculas.Count > 0)
+    {
+        Html.RenderPartial("_paginador", Model);
+    }
+}
+
+<div class="alert alert-info text-center">
+    <strong>TOTAL VALORIZADO ==> 200000</strong>
+</div>

@@ -1,0 +1,141 @@
+﻿@model IEnumerable<SICI_MVC.Models.SICI.Amortizacion_Detallada>
+
+@{
+    ViewBag.Title = "Amortizaciones Detalladas";
+}
+
+<p></p>
+
+@using (Html.BeginForm("Amortizaciones_Detalladas", "Home", FormMethod.Post))
+{
+<div class="panel panel-default">
+    <div class="panel-heading text-center">
+        <strong>
+            VALOR GENERAL DE LAS AMORTIZACIONES ANUALES DE CADA INVENTARIO AL 31
+            DE DICIEMBRE DE CADA AÑO
+        </strong>
+    </div>
+    <div class="panel-body" style="text-align:center">
+        <div class="form-inline">
+            @Html.Label("TIPO de BIEN: ")
+            @Html.DropDownList("cboTIPOBIEN", (List<SelectListItem>)ViewBag.MiListado, new { @class = "form-control", @style = "width:150px;" })
+            <button type="submit" class="btn btn-info">Buscar</button>
+        </div>
+    </div>
+</div>
+}
+
+@if (Model != null)
+{
+    string[] Años;
+    Años = new string[5];
+    Años = ViewBag.Años;
+
+    <table class="table table-bordered table-striped table-hover">
+        <tr>
+            <th class="text-center" colspan="3">
+                @Html.DisplayName("INVENTARIO")
+            </th>
+            <th class="text-center" colspan="6">
+                @Html.DisplayName("AMORTIZACIONES ANUALES")
+            </th>
+        </tr>
+        <tr>
+            <th class="active text-center">
+                @Html.DisplayName("SIGLA")
+            </th>
+            <th class="active text-center">
+                @Html.DisplayName("TIPO")
+                <br />
+                @Html.DisplayName("BIEN")
+            </th>
+            <th class="active text-center">
+                @Html.DisplayName("DESCRIPCION")
+            </th>
+            <th class="active text-center">
+                @Html.DisplayName("AÑO")
+                <br />
+                @Html.DisplayName("ACTUAL")
+            </th>
+            <th class="active text-center">
+                @Html.DisplayName("AÑO")
+                <br />
+                @Html.DisplayName(Años[0])
+            </th>
+            <th class="active text-center">
+                @Html.DisplayName("AÑO")
+                <br />
+                @Html.DisplayName(Años[1])
+            </th>
+            <th class="active text-center">
+                @Html.DisplayName("AÑO")
+                <br />
+                @Html.DisplayName(Años[2])
+            </th>
+            <th class="active text-center">
+                @Html.DisplayName("AÑO")
+                <br />
+                @Html.DisplayName(Años[3])
+            </th>
+            <th class="active text-center">
+                @Html.DisplayName("AÑO")
+                <br />
+                @Html.DisplayName(Años[4])
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Sigla)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Tipo_Bien)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Descripcion_Inventario)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Amortizaciones[0])
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Amortizaciones[1])
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Amortizaciones[2])
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Amortizaciones[3])
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Amortizaciones[4])
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Amortizaciones[5])
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success text-center">
+        <strong>@ViewBag.Mensaje</strong>
+    </div>
+}
+
+@if (ViewBag.Resultado != null)
+{
+    <div class="alert alert-info text-center">
+        <strong>@ViewBag.Resultado</strong>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-warning text-center">
+        <strong>@ViewBag.Error</strong>
+    </div>
+}

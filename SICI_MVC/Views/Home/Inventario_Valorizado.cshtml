@@ -1,0 +1,132 @@
+﻿@model SICI_MVC.Models.SIGMA.Inventario_Valorizado_Pagina
+
+@{
+    ViewBag.Title = "Inventario Valorizado";
+    List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
+}
+
+<p></p>
+
+@using (Html.BeginForm("Inventario_Valorizado", "Home", FormMethod.Post))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading text-center">
+            <strong>INVENTARIO DE EFECTOS VALORIZADOS PARA UN AÑO DE ALTA DETERMINADO</strong>
+        </div>
+        <div class="panel-body" style="text-align:center">
+            <div class="form-inline">
+                @Html.Label("INVENTARIO: ")
+                @Html.DropDownList("cboInventario", items, "SELECCIONE", new { @class = "form-control", @style = "width:1000px;" })
+                @Html.Label("     ")
+                @Html.Label("AÑO: ")
+                @Html.TextBox("txtAÑO", "", new { @class = "form-control", @type = "number", @style = "width:100px;" })
+                <button type="submit" class="btn btn-info">Buscar</button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model.Inventario_Valorizado != null)
+{
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th class="text-center">
+            @Html.DisplayName("NNE")
+            <br />
+            @Html.DisplayName("EFECTO")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("NOMENCLATURA")
+            <br />
+            @Html.DisplayName("EFECTO")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("NUMERO")
+            <br />
+            @Html.DisplayName("LOTE")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("CANT")
+            <br />
+            @Html.DisplayName("TOTAL")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("VALOR")
+            <br />
+            @Html.DisplayName("COMPRA")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("AMORTIZAC")
+            <br />
+            @Html.DisplayName("ACUMULADA")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("VALOR")
+            <br />
+            @Html.DisplayName("ACTUAL")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("AÑO")
+            <br />
+            @Html.DisplayName("AMORTIZA")
+        </th>
+    </tr>
+
+    @for (int i = 0; i < Model.Inventario_Valorizado.Count; i++)
+    {
+        <tr>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Inventario_Valorizado[i].NNE)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Inventario_Valorizado[i].Nomenclatura)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Inventario_Valorizado[i].NroLote)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Inventario_Valorizado[i].Cantidad)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Inventario_Valorizado[i].Valor_Adquisicion)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Inventario_Valorizado[i].Amortizacion_Acumulada)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Inventario_Valorizado[i].Valor_Actualizado)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Inventario_Valorizado[i].Año_Amortizacion)
+            </td>
+        </tr>
+    }
+
+</table>
+
+    if (Model.Inventario_Valorizado.Count > 0)
+    {
+        Html.RenderPartial("_paginador", Model);
+    }
+}
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success text-center">
+        <strong>@ViewBag.Mensaje</strong>
+    </div>
+}
+
+@if (ViewBag.Resultado != null)
+{
+    <div class="alert alert-info text-center">
+        <strong>@ViewBag.Resultado</strong>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-warning text-center">
+        <strong>@ViewBag.Error</strong>
+    </div>
+}

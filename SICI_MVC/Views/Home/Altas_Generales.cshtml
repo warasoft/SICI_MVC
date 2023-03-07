@@ -1,0 +1,150 @@
+﻿@model SICI_MVC.Models.SIGMA.Altas_Generales_Pagina
+
+@{
+    ViewBag.Title = "Altas Generales";
+    List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
+}
+
+<p></p>
+
+@using (Html.BeginForm("Altas_Generales", "Home", FormMethod.Post))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading text-center">
+            <strong>ALTAS GENERALES DE EFECTOS EN UN RANGO DE FECHAS DE ALTA</strong>
+        </div>
+        <div class="panel-body" style="text-align:center">
+            <div class="form-inline">
+                @Html.Label("FECHA DESDE: ")
+                @Html.TextBox("txtFECHA_DESDE", "", new { @class = "form-control date-picker", @maxLength = "10", @type = "date", @style = "width:200px;" })
+                @Html.Label("     ")
+                @Html.Label("FECHA HASTA: ")
+                @Html.TextBox("txtFECHA_HASTA", "", new { @class = "form-control date-picker", @type = "date", @maxLength = "10", @style = "width:200px;" })
+                @Html.Label("     ")
+                @Html.Label("ORIGEN GASTO: ")
+                @Html.DropDownList("cboORIGEN", items, "SELECCIONE", new { @class = "form-control", @style = "width:200px;" })
+                <button type="submit" class="btn btn-info">Buscar</button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model.Altas_Generales != null)
+{
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th class="text-center">
+            @Html.DisplayName("NUMERO")
+            <br />
+            @Html.DisplayName("LOTE")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("FECHA")
+            <br />
+            @Html.DisplayName("ALTA")
+        </th>
+        <th class="text-center ">
+            @Html.DisplayName("ORIGEN")
+            <br />
+            @Html.DisplayName("GASTO")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("DOCUMENTO")
+            <br />
+            @Html.DisplayName("COMPRA")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("EXPEDIENTE")
+            <br />
+            @Html.DisplayName("COMPRA")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("NNE")
+            <br />
+            @Html.DisplayName("EFECTO")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("NOMENCLATURA")
+            <br />
+            @Html.DisplayName("EFECTO")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("CANT")
+            <br />
+            @Html.DisplayName("TOTAL")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("TOTAL")
+            <br />
+            @Html.DisplayName("COMPRA")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("TOTAL")
+            <br />
+            @Html.DisplayName("VALORIZADO")
+        </th>
+    </tr>
+
+    @for (int i = 0; i < Model.Altas_Generales.Count; i++)
+    {
+        <tr>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Altas_Generales[i].NroLote)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Altas_Generales[i].Fecha_Alta)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Altas_Generales[i].Origen_Gasto)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Altas_Generales[i].Documento_Compra)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Altas_Generales[i].Expediente_Compra)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Altas_Generales[i].NNE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Altas_Generales[i].Nomenclatura)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Altas_Generales[i].Cantidad)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Altas_Generales[i].Total_Compra)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Altas_Generales[i].Total_Valorizado)
+            </td>
+        </tr>
+    }
+</table>
+
+    if (Model.Altas_Generales.Count > 0)
+    {
+        Html.RenderPartial("_paginador", Model);
+    }
+}
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success text-center">
+        <strong>@ViewBag.Mensaje</strong>
+    </div>
+}
+
+@if (ViewBag.Resultado != null)
+{
+    <div class="alert alert-info text-center">
+        <strong>@ViewBag.Resultado</strong>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-warning text-center">
+        <strong>@ViewBag.Error</strong>
+    </div>
+}

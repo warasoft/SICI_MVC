@@ -1,0 +1,139 @@
+﻿@model SICI_MVC.Models.SIGMA.Efectos_Amortizados_Pagina
+
+@{
+    ViewBag.Title = "Efectos Amortizados";
+}
+
+<p></p>
+
+@using (Html.BeginForm("Efectos_Amortizados", "Home", FormMethod.Post))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading text-center">
+            <strong>EFECTOS QUE SE ENCUENTRAN TOTALMENTE AMORTIZADOS PARA UN INTERVALO DE FECHAS DE ALTA</strong>
+        </div>
+        <div class="panel-body" style="text-align:center">
+            <div class="form-inline">
+                @Html.Label("FECHA DESDE: ")
+                @Html.TextBox("txtFECHA_DESDE", "", new { @class = "form-control date-picker", @maxLength = "10", @type = "date", @style = "width:200px;" })
+                @Html.Label("     ")
+                @Html.Label("FECHA HASTA: ")
+                @Html.TextBox("txtFECHA_HASTA", "", new { @class = "form-control date-picker", @type = "date", @maxLength = "10", @style = "width:200px;" })
+                <button type="submit" class="btn btn-info">Buscar</button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model.Efectos_Amortizados != null)
+{
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th class="text-center">
+            @Html.DisplayName("NNE")
+            <br />
+            @Html.DisplayName("EFECTO")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("NOMENCLATURA")
+            <br />
+            @Html.DisplayName("EFECTO")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("NUMERO")
+            <br />
+            @Html.DisplayName("LOTE")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("FECHA")
+            <br />
+            @Html.DisplayName("ALTA")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("CANT")
+            <br />
+            @Html.DisplayName("TOTAL")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("VALOR")
+            <br />
+            @Html.DisplayName("COMPRA")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("VIDA")
+            <br />
+            @Html.DisplayName("UTIL")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("AMORTIZAC")
+            <br />
+            @Html.DisplayName("ACUMULADA")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("VALOR")
+            <br />
+            @Html.DisplayName("RESIDUAL")
+        </th>
+    </tr>
+
+    @for (int i = 0; i < Model.Efectos_Amortizados.Count; i++)
+    {
+        <tr>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Efectos_Amortizados[i].NNE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Efectos_Amortizados[i].Nomenclatura)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Efectos_Amortizados[i].NroLote)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Efectos_Amortizados[i].Fecha_Alta)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Efectos_Amortizados[i].Cantidad)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Efectos_Amortizados[i].Valor_Adquisicion)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Efectos_Amortizados[i].Vida_Util)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Efectos_Amortizados[i].Amortizacion_Acumulada)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Efectos_Amortizados[i].Valor_Residual)
+            </td>
+        </tr>
+    }
+
+</table>
+
+    if (Model.Efectos_Amortizados.Count > 0)
+    {
+        Html.RenderPartial("_paginador", Model);
+    }
+}
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success text-center">
+        <strong>@ViewBag.Mensaje</strong>
+    </div>
+}
+
+@if (ViewBag.Resultado != null)
+{
+    <div class="alert alert-info text-center">
+        <strong>@ViewBag.Resultado</strong>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-warning text-center">
+        <strong>@ViewBag.Error</strong>
+    </div>
+}

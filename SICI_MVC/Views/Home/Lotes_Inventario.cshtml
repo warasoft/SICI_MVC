@@ -1,0 +1,178 @@
+﻿@model SICI_MVC.Models.SIGMA.Lotes_Inventario_Pagina
+
+@{
+    ViewBag.Title = "Lotes Inventario";
+    List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
+}
+
+<p></p>
+
+@using (Html.BeginForm("Lotes_Inventario", "Home", FormMethod.Post))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading text-center">
+            <strong>LOTES DISTRIBUIDOS POR INVENTARIO DURANTE UN PERIODO DETERMINADO</strong>
+        </div>
+        <div class="panel-body" style="text-align:center">
+            <div class="form-inline">
+                @Html.Label("DESDE: ")
+                @Html.TextBox("txtFECHA_DESDE", "", new { @class = "form-control date-picker", @maxLength = "10", @type = "date", @style = "width:200px;" })
+                @Html.Label("     ")
+                @Html.Label("HASTA: ")
+                @Html.TextBox("txtFECHA_HASTA", "", new { @class = "form-control date-picker", @type = "date", @maxLength = "10", @style = "width:200px;" })
+                @Html.Label("     ")
+                @Html.Label("INVENTARIO: ")
+                @Html.DropDownList("cboInventario", items, "SELECCIONE", new { @class = "form-control", @style = "width:600px;" })
+                <button type="submit" class="btn btn-info">Buscar</button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model.Lotes_Inventario != null)
+{
+<table class="table table-bordered table-striped table-hover table-condensed">
+    <tr>
+        <th class="text-center" rowspan="2">
+            <br />
+            @Html.DisplayName("CODIGO")
+            <br />
+            @Html.DisplayName("INVENT")
+        </th>
+        <th class="text-center" colspan="2">
+            @Html.DisplayName("PRESUPUESTARIO")
+        </th>
+        <th class="text-center" colspan="2">
+            @Html.DisplayName("NO PRESUPUESTARIO")
+        </th>
+        <th class="text-center" colspan="2">
+            @Html.DisplayName("DONACION")
+        </th>
+        <th class="text-center" colspan="2">
+            @Html.DisplayName("TRANSFERENCIA")
+        </th>
+        <th class="text-center" colspan="2">
+            @Html.DisplayName("TOTALES")
+        </th>
+    </tr>
+
+    <tr>
+        <th class="active text-center">
+            @Html.DisplayName("VALOR")
+            <br />
+            @Html.DisplayName("TOTAL")
+        </th>
+        <th class="active text-center">
+            @Html.DisplayName("TOTAL")
+            <br />
+            @Html.DisplayName("VALORIZADO")
+        </th>
+        <th class="active text-center">
+            @Html.DisplayName("VALOR")
+            <br />
+            @Html.DisplayName("TOTAL")
+        </th>
+        <th class="active text-center">
+            @Html.DisplayName("TOTAL")
+            <br />
+            @Html.DisplayName("VALORIZADO")
+        </th>
+        <th class="active text-center">
+            @Html.DisplayName("VALOR")
+            <br />
+            @Html.DisplayName("TOTAL")
+        </th>
+        <th class="active text-center">
+            @Html.DisplayName("TOTAL")
+            <br />
+            @Html.DisplayName("VALORIZADO")
+        </th>
+        <th class="active text-center">
+            @Html.DisplayName("VALOR")
+            <br />
+            @Html.DisplayName("TOTAL")
+        </th>
+        <th class="active text-center">
+            @Html.DisplayName("TOTAL")
+            <br />
+            @Html.DisplayName("VALORIZADO")
+        </th>
+        <th class="active text-center">
+            @Html.DisplayName("VALOR")
+            <br />
+            @Html.DisplayName("TOTAL")
+        </th>
+        <th class="active text-center">
+            @Html.DisplayName("TOTAL")
+            <br />
+            @Html.DisplayName("VALORIZADO")
+        </th>
+    </tr>
+
+    @for (int i = 0; i < Model.Lotes_Inventario.Count; i++)
+    {
+        <tr>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Lotes_Inventario[i].Cod_Inventario)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Lotes_Inventario[i].Valor_Total_Presupuestario)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Lotes_Inventario[i].Total_Valorizado_Presupuestario)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Lotes_Inventario[i].Valor_Total_No_Presupuestario)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Lotes_Inventario[i].Total_Valorizado_No_Presupuestario)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Lotes_Inventario[i].Valor_Total_Donacion)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Lotes_Inventario[i].Total_Valorizado_Donacion)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Lotes_Inventario[i].Valor_Total_Transferencia)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Lotes_Inventario[i].Total_Valorizado_Transferencia)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Lotes_Inventario[i].Valor_Total_General)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Lotes_Inventario[i].Total_Valorizado_General)
+            </td>
+        </tr>
+    }
+
+</table>
+
+    if (Model.Lotes_Inventario.Count > 0)
+    {
+        Html.RenderPartial("_paginador", Model);
+    }
+}
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success text-center">
+        <strong>@ViewBag.Mensaje</strong>
+    </div>
+}
+
+@if (ViewBag.Resultado != null)
+{
+    <div class="alert alert-info text-center">
+        <strong>@ViewBag.Resultado</strong>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-warning text-center">
+        <strong>@ViewBag.Error</strong>
+    </div>
+}

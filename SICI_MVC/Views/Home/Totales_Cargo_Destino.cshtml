@@ -1,0 +1,123 @@
+﻿@model SICI_MVC.Models.SIGMA.Totales_Cargo_Destino_Pagina
+
+@{
+    ViewBag.Title = "Valorización por Cargo Destino";
+}
+
+<p></p>
+
+@using (Html.BeginForm("Totales_Cargo_Destino", "Home", FormMethod.Post))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading text-center">
+            <strong>VALORIZACION TOTAL POR CARGO DESTINO DE EFECTOS ASIGNADOS</strong>
+        </div>
+        <div class="panel-body" style="text-align:center">
+            <div class="form-inline">
+                @Html.Label("Sigla Destino: ")
+                @Html.TextBox("txtSigla", "", new { @class = "form-control", @maxLength = "4", @style = "width:100px;" })
+                @Html.Label("     ")
+                @Html.Label("Cargo Destino: ")
+                @Html.TextBox("txtCargoDestino", "", new { @class = "form-control", @maxLength = "6", @style = "width:100px;" })
+                <button type="submit" class="btn btn-info">Buscar</button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model.Totales_Cargo_Destino != null)
+{
+    <table class="table table-bordered table-striped table-hover">
+        <tr>
+            <th class="text-center">
+                @Html.DisplayName("SIGLA")
+                <br />
+                @Html.DisplayName("DESTINO")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("CODIGO")
+                <br />
+                @Html.DisplayName("DESTINO")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("CARGO")
+                <br />
+                @Html.DisplayName("DESTINO")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("DESCRIPCION")
+                <br />
+                @Html.DisplayName("CARGO DESTINO")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("VALOR")
+                <br />
+                @Html.DisplayName("TOTAL")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("AMORTIZAC")
+                <br />
+                @Html.DisplayName("ACUMULADA")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("TOTAL")
+                <br />
+                @Html.DisplayName("VALORIZADO")
+            </th>
+        </tr>
+
+        @for (int i = 0; i < Model.Totales_Cargo_Destino.Count; i++)
+        {
+            <tr>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => Model.Totales_Cargo_Destino[i].Sigla)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => Model.Totales_Cargo_Destino[i].Codigo)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => Model.Totales_Cargo_Destino[i].Cargo_Destino)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Totales_Cargo_Destino[i].Descripcion)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => Model.Totales_Cargo_Destino[i].Valor_Total)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => Model.Totales_Cargo_Destino[i].Amortizacion_Acumulada)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => Model.Totales_Cargo_Destino[i].Total_Valorizado)
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    if (Model.Totales_Cargo_Destino.Count > 0)
+    {
+        Html.RenderPartial("_paginador", Model);
+    }
+}
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success text-center">
+        <strong>@ViewBag.Mensaje</strong>
+    </div>
+}
+
+@if (ViewBag.Resultado != null)
+{
+    <div class="alert alert-info text-center">
+        <strong>@ViewBag.Resultado</strong>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-warning text-center">
+        <strong>@ViewBag.Error</strong>
+    </div>
+}

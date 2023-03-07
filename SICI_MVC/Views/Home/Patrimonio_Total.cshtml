@@ -1,0 +1,102 @@
+﻿@model IEnumerable<SICI_MVC.Models.SICI_spPatrimonio_Total_Obtener_Result>
+
+@{
+    ViewBag.Title = "Patrimonio Total";
+}
+
+<p></p>
+
+<div class="panel panel-default">
+    <div class="panel-heading text-center">
+        <strong>PATRIMONIO TOTAL DE LOS INVENTARIOS DE LA ARMADA ARGENTINA</strong>
+    </div>
+</div>
+
+@if (Model != null)
+{
+    <table class="table table-bordered table-striped table-hover">
+        <tr>
+            <th class="text-center">
+                @Html.DisplayName("SIGLA")
+                <br />
+                @Html.DisplayName("DESTINO")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("CODIGO")
+                <br />
+                @Html.DisplayName("DESTINO")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("DESCRIPCION")
+                <br />
+                @Html.DisplayName("DESTINO")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("TIPO")
+                <br />
+                @Html.DisplayName("BIEN")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("DESCRIPCION")
+                <br />
+                @Html.DisplayName("INVENTARIO")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("TOTAL")
+                <br />
+                @Html.DisplayName("VALORIZADO")
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Sigla)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Codigo)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Tipo_Bien)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Inventario)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Total_Valorizado)
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+@*<div class="progress" style="margin:100px">
+        <div id="bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+            <span class="sr-only">0% Complete</span>
+        </div>
+    </div>
+    <script>
+          var progreso = 0;
+          var idIterval = setInterval(function(){
+            // Aumento en 10 el progeso
+            progreso +=10;
+            $('#bar').css('width', progreso + '%');
+
+          //Si llegó a 100 elimino el interval
+            if(progreso == 100){
+           clearInterval(idIterval);
+          }
+          },1000);
+    </script>*@
+
+@if (ViewBag.Totalizado != null)
+{
+    <div class="alert alert-info text-center">
+        <strong>@ViewBag.Totalizado</strong>
+    </div>
+}

@@ -1,0 +1,142 @@
+﻿@model SICI_MVC.Models.SIGMA.Despiece_Valorizado_Pagina
+
+@{
+    ViewBag.Title = "Despiece Valorizado";
+}
+
+<p></p>
+
+@using (Html.BeginForm("Despiece_Valorizado", "Home", FormMethod.Post))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading text-center">
+            <strong>DESPIECE VALORIZADO DE UN EFECTO DETALLADO POR SU NRO.DE INVENTARIO/NRO.DE SERIE</strong>
+        </div>
+        <div class="panel-body" style="text-align:center">
+            <div class="form-inline">
+                @Html.Label("NNE: ")
+                @Html.TextBox("txtNNE", "", new { @class = "form-control", @maxLength = "13", @style = "width:200px;" })
+                @Html.Label("     ")
+                @Html.Label("NRO INVENTARIO: ")
+                @Html.TextBox("txtNROINVENTARIO", "", new { @class = "form-control", @type = "number", @style = "width:200px;" })
+                @Html.Label("     ")
+                @Html.Label("NRO SERIE-EJEMPLAR: ")
+                @Html.TextBox("txtNROSERIEJ", "", new { @class = "form-control", @maxLength = "50", @style = "width:200px;" })
+                <button type="submit" class="btn btn-info">Buscar</button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model.Despiece_Valorizado != null)
+{
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th class="text-center">
+            @Html.DisplayName("NNE")
+            <br />
+            @Html.DisplayName("DESPIECE")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("NOMENCLATURA")
+            <br />
+            @Html.DisplayName("DESPIECE")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("NUMERO")
+            <br />
+            @Html.DisplayName("LOTE")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("FECHA")
+            <br />
+            @Html.DisplayName("ALTA")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("CANT")
+            <br />
+            @Html.DisplayName("TOTAL")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("VALOR")
+            <br />
+            @Html.DisplayName("COMPRA")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("VIDA")
+            <br />
+            @Html.DisplayName("UTIL")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("AMORTIZAC")
+            <br />
+            @Html.DisplayName("ACUMULADA")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("VALOR")
+            <br />
+            @Html.DisplayName("ACTUAL")
+        </th>
+    </tr>
+
+    @for (int i = 0; i < Model.Despiece_Valorizado.Count; i++)
+    {
+        <tr>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Despiece_Valorizado[i].NNE_Despiece)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Despiece_Valorizado[i].Nomenclatura)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Despiece_Valorizado[i].NroLote)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Despiece_Valorizado[i].Fecha_Alta)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Despiece_Valorizado[i].Cantidad)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Despiece_Valorizado[i].Valor_Compra)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Despiece_Valorizado[i].Vida_Util)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Despiece_Valorizado[i].Amortizacion_Acumulada)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Despiece_Valorizado[i].Valor_Actual)
+            </td>
+        </tr>
+    }
+
+</table>
+
+    if (Model.Despiece_Valorizado.Count > 0)
+    {
+        Html.RenderPartial("_paginador", Model);
+    }
+}
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success text-center">
+        <strong>@ViewBag.Mensaje</strong>
+    </div>
+}
+
+@if (ViewBag.Resultado != null)
+{
+    <div class="alert alert-info text-center">
+        <strong>@ViewBag.Resultado</strong>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-warning text-center">
+        <strong>@ViewBag.Error</strong>
+    </div>
+}

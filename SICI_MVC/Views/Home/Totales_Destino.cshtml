@@ -1,0 +1,123 @@
+﻿@model SICI_MVC.Models.SIGMA.Totales_Destino_Pagina
+
+@{
+    ViewBag.Title = "Valorización por Destino";
+}
+
+<p></p>
+
+@using (Html.BeginForm("Totales_Destino", "Home", FormMethod.Post))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading text-center">
+            <strong>VALORIZACION TOTAL POR DESTINO DE EFECTOS ASIGNADOS</strong>
+        </div>
+        <div class="panel-body" style="text-align:center">
+            <div class="form-inline">
+                @Html.Label("Zona Naval: ")
+                @Html.TextBox("txtZona", "", new { @class = "form-control", @maxLength = "2", @style = "width:100px;" })
+                @Html.Label("     ")
+                @Html.Label("Sigla Destino: ")
+                @Html.TextBox("txtSigla", "", new { @class = "form-control", @maxLength = "4", @style = "width:100px;" })
+                <button type="submit" class="btn btn-info">Buscar</button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model.Totales_Destino != null)
+{
+    <table class="table table-bordered table-striped table-hover">
+        <tr>
+            <th class="text-center">
+                @Html.DisplayName("SIGLA")
+                <br />
+                @Html.DisplayName("DESTINO")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("CODIGO")
+                <br />
+                @Html.DisplayName("DESTINO")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("DESCRIPCION")
+                <br />
+                @Html.DisplayName("DESTINO")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("VALOR")
+                <br />
+                @Html.DisplayName("TOTAL")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("AMORTIZAC")
+                <br />
+                @Html.DisplayName("ACUMULADA")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("TOTAL")
+                <br />
+                @Html.DisplayName("VALORIZADO")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("ZONA")
+                <br />
+                @Html.DisplayName("NAVAL")
+            </th>
+        </tr>
+
+        @for (int i = 0; i < Model.Totales_Destino.Count; i++)
+        {
+            <tr>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => Model.Totales_Destino[i].Sigla)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => Model.Totales_Destino[i].Codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => Model.Totales_Destino[i].Descripcion)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => Model.Totales_Destino[i].Valor_Total)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => Model.Totales_Destino[i].Amortizacion_Acumulada)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => Model.Totales_Destino[i].Total_Valorizado)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => Model.Totales_Destino[i].Zona_Naval)
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    if (Model.Totales_Destino.Count > 0)
+    {
+        Html.RenderPartial("_paginador", Model);
+    }
+}
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success text-center">
+        <strong>@ViewBag.Mensaje</strong>
+    </div>
+}
+
+@if (ViewBag.Resultado != null)
+{
+    <div class="alert alert-info text-center">
+        <strong>@ViewBag.Resultado</strong>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-warning text-center">
+        <strong>@ViewBag.Error</strong>
+    </div>
+}

@@ -1,0 +1,160 @@
+﻿@model SICI_MVC.Models.SIGMA.Descargos_Valorizados_Pagina
+
+@{
+    ViewBag.Title = "Descargos Valorizados";
+}
+
+<p></p>
+
+@using (Html.BeginForm("Descargos_Valorizados", "Home", FormMethod.Post))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading text-center">
+            <strong>DESCARGOS VALORIZADOS DE EFECTOS EN UN RANGO DE FECHAS DE ALTA</strong>
+        </div>
+        <div class="panel-body" style="text-align:center">
+            <div class="form-inline">
+                @Html.Label("FECHA DESDE: ")
+                @Html.TextBox("txtFECHA_DESDE", "", new { @class = "form-control date-picker", @maxLength = "10", @type = "date", @style = "width:200px;" })
+                @Html.Label("     ")
+                @Html.Label("FECHA HASTA: ")
+                @Html.TextBox("txtFECHA_HASTA", "", new { @class = "form-control date-picker", @type = "date", @maxLength = "10", @style = "width:200px;" })
+                @Html.Label("SIGLA: ")
+                @Html.TextBox("txtSIGLA", "", new { @class = "form-control", @maxLength = "4", @style = "width:100px;" })
+                @Html.Label("     ")
+                @Html.Label("NNE: ")
+                @Html.TextBox("txtNNE", "", new { @class = "form-control", @maxLength = "13", @style = "width:200px;" })
+                <button type="submit" class="btn btn-info">Buscar</button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model.Descargos_Valorizados != null)
+{
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th class="text-center">
+            @Html.DisplayName("NNE")
+            <br />
+            @Html.DisplayName("EFECTO")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("NOMENCLATURA")
+            <br />
+            @Html.DisplayName("EFECTO")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("NUMERO")
+            <br />
+            @Html.DisplayName("LOTE")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("FECHA")
+            <br />
+            @Html.DisplayName("ALTA")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("CANTIDAD")
+            <br />
+            @Html.DisplayName("DESCARGO")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("VIDA")
+            <br />
+            @Html.DisplayName("UTIL")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("VALOR")
+            <br />
+            @Html.DisplayName("COMPRA")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("AMORTIZAC")
+            <br />
+            @Html.DisplayName("ACUMULADA")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("VALOR")
+            <br />
+            @Html.DisplayName("ACTUAL")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("FECHA")
+            <br />
+            @Html.DisplayName("DESCARGO")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("SIGLA")
+            <br />
+            @Html.DisplayName("DESTINO")
+        </th>
+    </tr>
+
+    @for (int i = 0; i < Model.Descargos_Valorizados.Count; i++)
+    {
+        <tr>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Descargos_Valorizados[i].NNE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Descargos_Valorizados[i].Nomenclatura)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Descargos_Valorizados[i].NroLote)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Descargos_Valorizados[i].Fecha_Alta)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Descargos_Valorizados[i].Cantidad)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Descargos_Valorizados[i].Vida_Util)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Descargos_Valorizados[i].Valor_Adquisicion)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Descargos_Valorizados[i].Amortizacion_Acumulada)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Descargos_Valorizados[i].Valor_Actual)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Descargos_Valorizados[i].Fecha_Descargo)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Descargos_Valorizados[i].Sigla_Destino)
+            </td>
+        </tr>
+    }
+
+</table>
+
+    if (Model.Descargos_Valorizados.Count > 0)
+    {
+        Html.RenderPartial("_paginador", Model);
+    }
+}
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success text-center">
+        <strong>@ViewBag.Mensaje</strong>
+    </div>
+}
+
+@if (ViewBag.Resultado != null)
+{
+    <div class="alert alert-info text-center">
+        <strong>@ViewBag.Resultado</strong>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-warning text-center">
+        <strong>@ViewBag.Error</strong>
+    </div>
+}

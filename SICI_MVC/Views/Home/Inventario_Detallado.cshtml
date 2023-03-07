@@ -1,0 +1,151 @@
+﻿@model IEnumerable<SICI_MVC.Models.SICI_spInventario_Detallado_Obtener_Result>
+
+@{
+    ViewBag.Title = "Inventario Detallado";
+}
+
+<p></p>
+
+@using (Html.BeginForm("Inventario_Detallado", "Home", FormMethod.Post))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading text-center">
+            <strong>VALOR TOTAL DE LOS INVENTARIOS DE LA ARMADA ARGENTINA AL 31 DE DICIEMBRE DE CADA AÑO</strong>
+        </div>
+        <div class="panel-body" style="text-align:center">
+            <div class="form-inline">
+                @Html.Label("AÑO de CONSULTA: ")
+                @Html.TextBox("txtAÑO", "", new { @class = "form-control", @type = "number", @style = "width:100px;" })
+                <button type="submit" class="btn btn-info">Buscar</button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model != null)
+{
+    string Fecha = "31/12/" + ViewBag.Año;
+
+    <table class="table table-bordered table-striped table-hover">
+        <tr>
+            <th class="text-center" colspan="3">
+                @Html.DisplayName("INVENTARIO")
+            </th>
+            <th class="text-center" colspan="3">
+                @Html.DisplayName("ACTIVOS")
+            </th>
+            <th class="text-center" colspan="3">
+                @Html.DisplayName("BAJAS")
+            </th>
+            <th class="text-center" rowspan="2">
+                @Html.DisplayName("VALOR")
+                <br />
+                @Html.DisplayName("TOTAL")
+                <br />
+                @Html.DisplayName("AL")
+                <br />
+                @Html.DisplayName(Fecha)
+            </th>
+        </tr>
+        <tr>
+            <th class="active text-center">
+                @Html.DisplayName("SIGLA")
+            </th>
+            <th class="active text-center">
+                @Html.DisplayName("TIPO")
+                <br />
+                @Html.DisplayName("BIEN")
+            </th>
+            <th class="active text-center">
+                @Html.DisplayName("DESCRIPCION")
+            </th>
+            <th class="active text-center">
+                @Html.DisplayName("TOTAL")
+                <br />
+                @Html.DisplayName("ORIGINAL")
+            </th>
+            <th class="active text-center">
+                @Html.DisplayName("AMORTIZACION")
+                <br />
+                @Html.DisplayName("ACUMULADA")
+            </th>
+            <th class="active text-center">
+                @Html.DisplayName("VALOR")
+                <br />
+                @Html.DisplayName("TOTAL")
+            </th>
+            <th class="active text-center">
+                @Html.DisplayName("TOTAL")
+                <br />
+                @Html.DisplayName("ORIGINAL")
+            </th>
+            <th class="active text-center">
+                @Html.DisplayName("TOTAL")
+                <br />
+                @Html.DisplayName("AMORTIZADO")
+            </th>
+            <th class="active text-center">
+                @Html.DisplayName("TOTAL")
+                <br />
+                @Html.DisplayName("RESIDUAL")
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Sigla)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Tipo_Bien)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Descripcion_Inventario)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Total_Original_Activos)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Amortizacion_Acumulada_Activos)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Valor_Total_Activos)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Total_Original_Bajas)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Total_Amortizado_Bajas)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Total_Residual_Bajas)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Total_General_Año)
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success text-center">
+        <strong>@ViewBag.Mensaje</strong>
+    </div>
+}
+
+@if (ViewBag.Resultado != null)
+{
+    <div class="alert alert-info text-center">
+        <strong>@ViewBag.Resultado</strong>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-warning text-center">
+        <strong>@ViewBag.Error</strong>
+    </div>
+}

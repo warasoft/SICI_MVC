@@ -1,0 +1,1087 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SIGMAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="M18_Inventarios">
+          <Key>
+            <PropertyRef Name="Id_Inventario" />
+          </Key>
+          <Property Name="Id_Inventario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="M18_OrigenGasto">
+          <Key>
+            <PropertyRef Name="Id_Origen" />
+          </Key>
+          <Property Name="Id_Origen" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Function Name="SIGMA_spAltas_Anuales_Obtener" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="iAño_Desde" Type="int" Mode="In" />
+          <Parameter Name="iAño_Hasta" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SIGMA_spAltas_Detalladas_Obtener" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sNNE" Type="varchar" Mode="In" />
+          <Parameter Name="dFecha_Desde" Type="datetime" Mode="In" />
+          <Parameter Name="dFecha_Hasta" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="SIGMA_spAltas_Generales_Obtener" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dFecha_Desde" Type="datetime" Mode="In" />
+          <Parameter Name="dFecha_Hasta" Type="datetime" Mode="In" />
+          <Parameter Name="iID_Origen" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SIGMA_spAltas_Totalizadas_Obtener" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="iID_Inventario" Type="int" Mode="In" />
+          <Parameter Name="iAño_Desde" Type="int" Mode="In" />
+          <Parameter Name="iAño_Hasta" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SIGMA_spAmortizaciones_Anuales_Obtener" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dFecha_Desde" Type="datetime" Mode="In" />
+          <Parameter Name="dFecha_Hasta" Type="datetime" Mode="In" />
+          <Parameter Name="sNroLote" Type="varchar" Mode="In" />
+          <Parameter Name="sNNE" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SIGMA_spDescargos_Valorizados_Obtener" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dFecha_Desde" Type="datetime" Mode="In" />
+          <Parameter Name="dFecha_Hasta" Type="datetime" Mode="In" />
+          <Parameter Name="sSigla" Type="varchar" Mode="In" />
+          <Parameter Name="sNNE" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SIGMA_spDespiece_Valorizado_Obtener" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sNNE_Primario" Type="varchar" Mode="In" />
+          <Parameter Name="iNroInven_Primario" Type="bigint" Mode="In" />
+          <Parameter Name="sNroSerie_Primario" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SIGMA_spEfectos_Amortizados_Obtener" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dFecha_Desde" Type="datetime" Mode="In" />
+          <Parameter Name="dFecha_Hasta" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="SIGMA_spInventario_Valorizado_Obtener" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="iID_Inventario" Type="int" Mode="In" />
+          <Parameter Name="iAño" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SIGMA_spLotes_Destino_Obtener" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dFecha_Desde" Type="datetime" Mode="In" />
+          <Parameter Name="dFecha_Hasta" Type="datetime" Mode="In" />
+          <Parameter Name="sSigla" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SIGMA_spLotes_Inventario_Obtener" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="dFecha_Desde" Type="datetime" Mode="In" />
+          <Parameter Name="dFecha_Hasta" Type="datetime" Mode="In" />
+          <Parameter Name="iID_Inventario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SIGMA_spPeliculas_Seleccionar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sCod_Pais" Type="varchar" Mode="In" />
+          <Parameter Name="iAño" Type="int" Mode="In" />
+          <Parameter Name="dFecha_Desde" Type="datetime" Mode="In" />
+          <Parameter Name="dFecha_Hasta" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="SIGMA_spTotales_Cargo_Destino_Obtener" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sSigla" Type="varchar" Mode="In" />
+          <Parameter Name="sCargo_Destino" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SIGMA_spTotales_Cargo_Efecto_Obtener" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sCod_Cargo_Efecto" Type="varchar" Mode="In" />
+          <Parameter Name="sSigla_Destino" Type="varchar" Mode="In" />
+          <Parameter Name="sCod_CargoDestino" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SIGMA_spTotales_Destino_Obtener" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sZona" Type="varchar" Mode="In" />
+          <Parameter Name="sSigla" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SIGMA_spTotales_Efecto_Obtener" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sNNE" Type="varchar" Mode="In" />
+          <Parameter Name="sSigla_Destino" Type="varchar" Mode="In" />
+          <Parameter Name="sCod_CargoDestino" Type="varchar" Mode="In" />
+          <Parameter Name="sCargo_Efecto" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SIGMA_spValorizacion_Detallada_Obtener" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sNNE" Type="varchar" Mode="In" />
+          <Parameter Name="sNroLote" Type="varchar" Mode="In" />
+          <Parameter Name="sSigla" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="SIGMAModelStoreContainer">
+          <EntitySet Name="M18_Inventarios" EntityType="Self.M18_Inventarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="M18_OrigenGasto" EntityType="Self.M18_OrigenGasto" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SIGMAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="M18_OrigenGasto">
+          <Key>
+            <PropertyRef Name="Id_Origen" />
+          </Key>
+          <Property Name="Id_Origen" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="SIGMAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="M18_OrigenGasto" EntityType="Self.M18_OrigenGasto" />
+          <EntitySet Name="M18_Inventarios" EntityType="SIGMAModel.M18_Inventarios" />
+          <FunctionImport Name="SIGMA_spPeliculas_Seleccionar" ReturnType="Collection(SIGMAModel.SIGMA_spPeliculas_Seleccionar_Result)">
+            <Parameter Name="sCod_Pais" Mode="In" Type="String" />
+            <Parameter Name="iAño" Mode="In" Type="Int32" />
+            <Parameter Name="dFecha_Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="dFecha_Hasta" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spPeliculas_Seleccionar_FX" ReturnType="Collection(SIGMAModel.Pelicula)">
+            <Parameter Name="sCod_Pais" Mode="In" Type="String" />
+            <Parameter Name="iAño" Mode="In" Type="Int32" />
+            <Parameter Name="dFecha_Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="dFecha_Hasta" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spAltas_Anuales_Obtener" ReturnType="Collection(SIGMAModel.SIGMA_spAltas_Anuales_Obtener_Result)">
+            <Parameter Name="iAño_Desde" Mode="In" Type="Int32" />
+            <Parameter Name="iAño_Hasta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spAltas_Detalladas_Obtener" ReturnType="Collection(SIGMAModel.SIGMA_spAltas_Detalladas_Obtener_Result)">
+            <Parameter Name="sNNE" Mode="In" Type="String" />
+            <Parameter Name="dFecha_Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="dFecha_Hasta" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spAltas_Generales_Obtener" ReturnType="Collection(SIGMAModel.SIGMA_spAltas_Generales_Obtener_Result)">
+            <Parameter Name="dFecha_Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="dFecha_Hasta" Mode="In" Type="DateTime" />
+            <Parameter Name="iID_Origen" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spAltas_Totalizadas_Obtener" ReturnType="Collection(SIGMAModel.SIGMA_spAltas_Totalizadas_Obtener_Result)">
+            <Parameter Name="iID_Inventario" Mode="In" Type="Int32" />
+            <Parameter Name="iAño_Desde" Mode="In" Type="Int32" />
+            <Parameter Name="iAño_Hasta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spAmortizaciones_Anuales_Obtener" ReturnType="Collection(SIGMAModel.SIGMA_spAmortizaciones_Anuales_Obtener_Result)">
+            <Parameter Name="dFecha_Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="dFecha_Hasta" Mode="In" Type="DateTime" />
+            <Parameter Name="sNroLote" Mode="In" Type="String" />
+            <Parameter Name="sNNE" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spDescargos_Valorizados_Obtener" ReturnType="Collection(SIGMAModel.SIGMA_spDescargos_Valorizados_Obtener_Result)">
+            <Parameter Name="dFecha_Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="dFecha_Hasta" Mode="In" Type="DateTime" />
+            <Parameter Name="sSigla" Mode="In" Type="String" />
+            <Parameter Name="sNNE" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spDespiece_Valorizado_Obtener" ReturnType="Collection(SIGMAModel.SIGMA_spDespiece_Valorizado_Obtener_Result)">
+            <Parameter Name="sNNE_Primario" Mode="In" Type="String" />
+            <Parameter Name="iNroInven_Primario" Mode="In" Type="Int64" />
+            <Parameter Name="sNroSerie_Primario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spEfectos_Amortizados_Obtener" ReturnType="Collection(SIGMAModel.SIGMA_spEfectos_Amortizados_Obtener_Result)">
+            <Parameter Name="dFecha_Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="dFecha_Hasta" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spInventario_Valorizado_Obtener" ReturnType="Collection(SIGMAModel.SIGMA_spInventario_Valorizado_Obtener_Result)">
+            <Parameter Name="iID_Inventario" Mode="In" Type="Int32" />
+            <Parameter Name="iAño" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spLotes_Destino_Obtener" ReturnType="Collection(SIGMAModel.SIGMA_spLotes_Destino_Obtener_Result)">
+            <Parameter Name="dFecha_Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="dFecha_Hasta" Mode="In" Type="DateTime" />
+            <Parameter Name="sSigla" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spLotes_Inventario_Obtener" ReturnType="Collection(SIGMAModel.SIGMA_spLotes_Inventario_Obtener_Result)">
+            <Parameter Name="dFecha_Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="dFecha_Hasta" Mode="In" Type="DateTime" />
+            <Parameter Name="iID_Inventario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spTotales_Cargo_Destino_Obtener" ReturnType="Collection(SIGMAModel.SIGMA_spTotales_Cargo_Destino_Obtener_Result)">
+            <Parameter Name="sSigla" Mode="In" Type="String" />
+            <Parameter Name="sCargo_Destino" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spTotales_Cargo_Efecto_Obtener" ReturnType="Collection(SIGMAModel.SIGMA_spTotales_Cargo_Efecto_Obtener_Result)">
+            <Parameter Name="sCod_Cargo_Efecto" Mode="In" Type="String" />
+            <Parameter Name="sSigla_Destino" Mode="In" Type="String" />
+            <Parameter Name="sCod_CargoDestino" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spTotales_Destino_Obtener" ReturnType="Collection(SIGMAModel.SIGMA_spTotales_Destino_Obtener_Result)">
+            <Parameter Name="sZona" Mode="In" Type="String" />
+            <Parameter Name="sSigla" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spTotales_Efecto_Obtener" ReturnType="Collection(SIGMAModel.SIGMA_spTotales_Efecto_Obtener_Result)">
+            <Parameter Name="sNNE" Mode="In" Type="String" />
+            <Parameter Name="sSigla_Destino" Mode="In" Type="String" />
+            <Parameter Name="sCod_CargoDestino" Mode="In" Type="String" />
+            <Parameter Name="sCargo_Efecto" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spValorizacion_Detallada_Obtener" ReturnType="Collection(SIGMAModel.SIGMA_spValorizacion_Detallada_Obtener_Result)">
+            <Parameter Name="sNNE" Mode="In" Type="String" />
+            <Parameter Name="sNroLote" Mode="In" Type="String" />
+            <Parameter Name="sSigla" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spAltas_Anuales_Obtener_FX" ReturnType="Collection(SIGMAModel.SIGMA_spAltas_Anuales_Obtener_Result)">
+            <Parameter Name="iAño_Desde" Mode="In" Type="Int32" />
+            <Parameter Name="iAño_Hasta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spAltas_Detalladas_Obtener_FX" ReturnType="Collection(SIGMAModel.SIGMA_spAltas_Detalladas_Obtener_Result)">
+            <Parameter Name="sNNE" Mode="In" Type="String" />
+            <Parameter Name="dFecha_Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="dFecha_Hasta" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spAltas_Generales_Obtener_FX" ReturnType="Collection(SIGMAModel.SIGMA_spAltas_Generales_Obtener_Result)">
+            <Parameter Name="dFecha_Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="dFecha_Hasta" Mode="In" Type="DateTime" />
+            <Parameter Name="iID_Origen" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spAltas_Totalizadas_Obtener_FX" ReturnType="Collection(SIGMAModel.SIGMA_spAltas_Totalizadas_Obtener_Result)">
+            <Parameter Name="iID_Inventario" Mode="In" Type="Int32" />
+            <Parameter Name="iAño_Desde" Mode="In" Type="Int32" />
+            <Parameter Name="iAño_Hasta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spAmortizaciones_Anuales_Obtener_FX" ReturnType="Collection(SIGMAModel.SIGMA_spAmortizaciones_Anuales_Obtener_Result)">
+            <Parameter Name="dFecha_Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="dFecha_Hasta" Mode="In" Type="DateTime" />
+            <Parameter Name="sNroLote" Mode="In" Type="String" />
+            <Parameter Name="sNNE" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spDescargos_Valorizados_Obtener_FX" ReturnType="Collection(SIGMAModel.SIGMA_spDescargos_Valorizados_Obtener_Result)">
+            <Parameter Name="dFecha_Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="dFecha_Hasta" Mode="In" Type="DateTime" />
+            <Parameter Name="sSigla" Mode="In" Type="String" />
+            <Parameter Name="sNNE" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spDespiece_Valorizado_Obtener_FX" ReturnType="Collection(SIGMAModel.SIGMA_spDespiece_Valorizado_Obtener_Result)">
+            <Parameter Name="sNNE_Primario" Mode="In" Type="String" />
+            <Parameter Name="iNroInven_Primario" Mode="In" Type="Int64" />
+            <Parameter Name="sNroSerie_Primario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spEfectos_Amortizados_Obtener_FX" ReturnType="Collection(SIGMAModel.SIGMA_spEfectos_Amortizados_Obtener_Result)">
+            <Parameter Name="dFecha_Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="dFecha_Hasta" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spInventario_Valorizado_Obtener_FX" ReturnType="Collection(SIGMAModel.SIGMA_spInventario_Valorizado_Obtener_Result)">
+            <Parameter Name="iID_Inventario" Mode="In" Type="Int32" />
+            <Parameter Name="iAño" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spLotes_Destino_Obtener_FX" ReturnType="Collection(SIGMAModel.SIGMA_spLotes_Destino_Obtener_Result)">
+            <Parameter Name="dFecha_Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="dFecha_Hasta" Mode="In" Type="DateTime" />
+            <Parameter Name="sSigla" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spLotes_Inventario_Obtener_FX" ReturnType="Collection(SIGMAModel.SIGMA_spLotes_Inventario_Obtener_Result)">
+            <Parameter Name="dFecha_Desde" Mode="In" Type="DateTime" />
+            <Parameter Name="dFecha_Hasta" Mode="In" Type="DateTime" />
+            <Parameter Name="iID_Inventario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spTotales_Cargo_Destino_Obtener_FX" ReturnType="Collection(SIGMAModel.SIGMA_spTotales_Cargo_Destino_Obtener_Result)">
+            <Parameter Name="sSigla" Mode="In" Type="String" />
+            <Parameter Name="sCargo_Destino" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spTotales_Cargo_Efecto_Obtener_FX" ReturnType="Collection(SIGMAModel.SIGMA_spTotales_Cargo_Efecto_Obtener_Result)">
+            <Parameter Name="sCod_Cargo_Efecto" Mode="In" Type="String" />
+            <Parameter Name="sSigla_Destino" Mode="In" Type="String" />
+            <Parameter Name="sCod_CargoDestino" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spTotales_Destino_Obtener_FX" ReturnType="Collection(SIGMAModel.SIGMA_spTotales_Destino_Obtener_Result)">
+            <Parameter Name="sZona" Mode="In" Type="String" />
+            <Parameter Name="sSigla" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spTotales_Efecto_Obtener_FX" ReturnType="Collection(SIGMAModel.SIGMA_spTotales_Efecto_Obtener_Result)">
+            <Parameter Name="sNNE" Mode="In" Type="String" />
+            <Parameter Name="sSigla_Destino" Mode="In" Type="String" />
+            <Parameter Name="sCod_CargoDestino" Mode="In" Type="String" />
+            <Parameter Name="sCargo_Efecto" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SIGMA_spValorizacion_Detallada_Obtener_FX" ReturnType="Collection(SIGMAModel.SIGMA_spValorizacion_Detallada_Obtener_Result)">
+            <Parameter Name="sNNE" Mode="In" Type="String" />
+            <Parameter Name="sNroLote" Mode="In" Type="String" />
+            <Parameter Name="sSigla" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="M18_Inventarios">
+          <Key>
+            <PropertyRef Name="Id_Inventario" />
+          </Key>
+          <Property Name="Id_Inventario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="SIGMA_spPeliculas_Seleccionar_Result">
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Duracion" Nullable="false" />
+          <Property Type="Int32" Name="Año" Nullable="false" />
+          <Property Type="String" Name="Genero" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="Cod_Pais" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="Des_Pais" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Fecha_Estreno" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="Pelicula">
+          <Property Type="String" Name="Titulo" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Duracion" Nullable="false" />
+          <Property Type="Int32" Name="Año" Nullable="false" />
+          <Property Type="String" Name="Genero" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="Cod_Pais" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="Des_Pais" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="Fecha_Estreno" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="SIGMA_spAltas_Anuales_Obtener_Result">
+          <Property Type="Decimal" Name="Valor_Total_Presupuestario" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Valorizado_Presupuestario" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Valor_Total_No_Presupuestario" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Valorizado_No_Presupuestario" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Valor_Total_Donacion" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Valorizado_Donacion" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Valor_Total_Transferencia" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Valorizado_Transferencia" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Valor_Total_General" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Valorizado_General" Nullable="false" Precision="19" />
+          <Property Type="Int32" Name="Año" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SIGMA_spAltas_Detalladas_Obtener_Result">
+          <Property Type="String" Name="NroLote" Nullable="false" MaxLength="11" />
+          <Property Type="DateTime" Name="Fecha_Alta" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Origen_Gasto" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Decimal" Name="Valor_Adquisicion" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Compra" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Amortizacion_Acumulada" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Valor_Actual" Nullable="false" Precision="19" />
+          <Property Type="String" Name="NNE" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="Desc_Proveedor" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="SIGMA_spAltas_Generales_Obtener_Result">
+          <Property Type="String" Name="NroLote" Nullable="false" MaxLength="11" />
+          <Property Type="DateTime" Name="Fecha_Alta" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Id_Origen" Nullable="false" />
+          <Property Type="String" Name="Origen_Gasto" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Documento_Compra" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Expediente_Compra" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="NNE" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="Nomenclatura" Nullable="false" MaxLength="250" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Decimal" Name="Total_Compra" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Valorizado" Nullable="false" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="SIGMA_spAltas_Totalizadas_Obtener_Result">
+          <Property Type="Int32" Name="Año_Alta" Nullable="false" />
+          <Property Type="Decimal" Name="Total_Altas_Presupuestarias" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Altas_No_Presupuestarias" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Altas_Donacion" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Altas_Transferencia" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Altas_General" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Valorizado" Nullable="false" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="SIGMA_spAmortizaciones_Anuales_Obtener_Result">
+          <Property Type="String" Name="NNE" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="Nomenclatura" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="NroLote" Nullable="false" MaxLength="11" />
+          <Property Type="DateTime" Name="Fecha_Alta" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Vida_Util" Nullable="false" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Decimal" Name="Valor_Compra" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Valor_Residual" Nullable="false" Precision="19" />
+          <Property Type="Int32" Name="Año_Amortizacion" Nullable="false" />
+          <Property Type="String" Name="Sigla_Destino" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="Cargo_Efecto" Nullable="false" MaxLength="2" />
+        </ComplexType>
+        <ComplexType Name="SIGMA_spDescargos_Valorizados_Obtener_Result">
+          <Property Type="String" Name="NNE" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="Nomenclatura" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="NroLote" Nullable="false" MaxLength="11" />
+          <Property Type="DateTime" Name="Fecha_Alta" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Int32" Name="Vida_Util" Nullable="false" />
+          <Property Type="Decimal" Name="Valor_Adquisicion" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Amortizacion_Acumulada" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Valor_Actual" Nullable="false" Precision="19" />
+          <Property Type="DateTime" Name="Fecha_Descargo" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Sigla_Destino" Nullable="false" MaxLength="4" />
+        </ComplexType>
+        <ComplexType Name="SIGMA_spDespiece_Valorizado_Obtener_Result">
+          <Property Type="String" Name="NNE_Primario" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="NroSerie_Primario" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="NroInven_Primario" Nullable="false" />
+          <Property Type="String" Name="NNE_Despiece" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="Nomenclatura" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="NroLote" Nullable="false" MaxLength="11" />
+          <Property Type="DateTime" Name="Fecha_Alta" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Decimal" Name="Valor_Compra" Nullable="false" Precision="19" />
+          <Property Type="Int32" Name="Vida_Util" Nullable="false" />
+          <Property Type="Decimal" Name="Amortizacion_Acumulada" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Valor_Actual" Nullable="false" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="SIGMA_spEfectos_Amortizados_Obtener_Result">
+          <Property Type="String" Name="NNE" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="Nomenclatura" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="NroLote" Nullable="false" MaxLength="11" />
+          <Property Type="DateTime" Name="Fecha_Alta" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Decimal" Name="Valor_Adquisicion" Nullable="false" Precision="19" />
+          <Property Type="Int32" Name="Vida_Util" Nullable="false" />
+          <Property Type="Decimal" Name="Amortizacion_Acumulada" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Valor_Residual" Nullable="false" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="SIGMA_spInventario_Valorizado_Obtener_Result">
+          <Property Type="Int32" Name="Id_Inventario" Nullable="false" />
+          <Property Type="Int32" Name="Año_Alta" Nullable="false" />
+          <Property Type="String" Name="NroLote" Nullable="false" MaxLength="11" />
+          <Property Type="String" Name="NNE" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="Nomenclatura" Nullable="false" MaxLength="250" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Decimal" Name="Valor_Adquisicion" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Amortizacion_Acumulada" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Valor_Actualizado" Nullable="false" Precision="19" />
+          <Property Type="Int32" Name="Año_Amortizacion" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SIGMA_spLotes_Destino_Obtener_Result">
+          <Property Type="String" Name="Sigla_Destino" Nullable="false" MaxLength="4" />
+          <Property Type="Decimal" Name="Valor_Total_Presupuestario" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Valorizado_Presupuestario" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Valor_Total_No_Presupuestario" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Valorizado_No_Presupuestario" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Valor_Total_Donacion" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Valorizado_Donacion" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Valor_Total_Transferencia" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Valorizado_Transferencia" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Valor_Total_General" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Valorizado_General" Nullable="false" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="SIGMA_spLotes_Inventario_Obtener_Result">
+          <Property Type="String" Name="Cod_Inventario" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="Des_Inventario" Nullable="false" MaxLength="250" />
+          <Property Type="Decimal" Name="Valor_Total_Presupuestario" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Valorizado_Presupuestario" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Valor_Total_No_Presupuestario" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Valorizado_No_Presupuestario" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Valor_Total_Donacion" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Valorizado_Donacion" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Valor_Total_Transferencia" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Valorizado_Transferencia" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Valor_Total_General" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Valorizado_General" Nullable="false" Precision="19" />
+          <Property Type="Int32" Name="Id_Inventario" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SIGMA_spTotales_Cargo_Destino_Obtener_Result">
+          <Property Type="String" Name="Sigla" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="Codigo" Nullable="false" MaxLength="6" />
+          <Property Type="String" Name="Cargo_Destino" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="200" />
+          <Property Type="Decimal" Name="Valor_Total" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Valorizado" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Amortizacion_Acumulada" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="SIGMA_spTotales_Cargo_Efecto_Obtener_Result">
+          <Property Type="String" Name="Cod_Cargo_Efecto" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="250" />
+          <Property Type="Decimal" Name="Total_Cargo_Efecto" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Valorizado" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Amortizado" Nullable="true" Precision="19" />
+          <Property Type="String" Name="Sigla_Destino" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="Cod_CargoDestino" Nullable="true" MaxLength="6" />
+        </ComplexType>
+        <ComplexType Name="SIGMA_spTotales_Destino_Obtener_Result">
+          <Property Type="String" Name="Sigla" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="Codigo" Nullable="false" MaxLength="6" />
+          <Property Type="String" Name="Descripcion" Nullable="false" MaxLength="200" />
+          <Property Type="Decimal" Name="Valor_Total" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Amortizacion_Acumulada" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Valorizado" Nullable="false" Precision="19" />
+          <Property Type="String" Name="Zona_Naval" Nullable="false" MaxLength="2" />
+        </ComplexType>
+        <ComplexType Name="SIGMA_spTotales_Efecto_Obtener_Result">
+          <Property Type="String" Name="NNE" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="Nomenclatura" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Cantidad" Nullable="false" />
+          <Property Type="Decimal" Name="Total_Efecto" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Valorizado" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Total_Amortizado" Nullable="true" Precision="19" />
+          <Property Type="String" Name="Cargo_Efecto" Nullable="false" MaxLength="2" />
+          <Property Type="String" Name="Sigla_Destino" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="Cod_CargoDestino" Nullable="true" MaxLength="6" />
+        </ComplexType>
+        <ComplexType Name="SIGMA_spValorizacion_Detallada_Obtener_Result">
+          <Property Type="String" Name="NNE" Nullable="false" MaxLength="13" />
+          <Property Type="String" Name="NroLote" Nullable="false" MaxLength="11" />
+          <Property Type="DateTime" Name="Fecha_Alta" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Nro_Serie" Nullable="false" MaxLength="50" />
+          <Property Type="Int64" Name="Nro_Inventario" Nullable="false" />
+          <Property Type="Decimal" Name="Precio_Compra" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Amortizacion_Acumulada" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="Valor_Actual" Nullable="false" Precision="19" />
+          <Property Type="String" Name="Estado" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Sigla_Destino" Nullable="false" MaxLength="4" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SIGMAModelStoreContainer" CdmEntityContainer="SIGMAEntities">
+          <EntitySetMapping Name="M18_OrigenGasto">
+            <EntityTypeMapping TypeName="SIGMAModel.M18_OrigenGasto">
+              <MappingFragment StoreEntitySet="M18_OrigenGasto">
+                <ScalarProperty Name="Id_Origen" ColumnName="Id_Origen" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="M18_Inventarios">
+            <EntityTypeMapping TypeName="SIGMAModel.M18_Inventarios">
+              <MappingFragment StoreEntitySet="M18_Inventarios">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Id_Inventario" ColumnName="Id_Inventario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spPeliculas_Seleccionar" FunctionName="SIGMAModel.Store.SIGMA_spPeliculas_Seleccionar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spPeliculas_Seleccionar_Result">
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Duracion" ColumnName="Duracion" />
+                <ScalarProperty Name="Año" ColumnName="Año" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Cod_Pais" ColumnName="Cod_Pais" />
+                <ScalarProperty Name="Des_Pais" ColumnName="Des_Pais" />
+                <ScalarProperty Name="Fecha_Estreno" ColumnName="Fecha_Estreno" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spPeliculas_Seleccionar_FX" FunctionName="SIGMAModel.Store.SIGMA_spPeliculas_Seleccionar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.Pelicula">
+                <ScalarProperty Name="Titulo" ColumnName="Titulo" />
+                <ScalarProperty Name="Duracion" ColumnName="Duracion" />
+                <ScalarProperty Name="Año" ColumnName="Año" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Cod_Pais" ColumnName="Cod_Pais" />
+                <ScalarProperty Name="Des_Pais" ColumnName="Des_Pais" />
+                <ScalarProperty Name="Fecha_Estreno" ColumnName="Fecha_Estreno" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spAltas_Anuales_Obtener" FunctionName="SIGMAModel.Store.SIGMA_spAltas_Anuales_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spAltas_Anuales_Obtener_Result">
+                <ScalarProperty Name="Valor_Total_Presupuestario" ColumnName="Valor_Total_Presupuestario" />
+                <ScalarProperty Name="Total_Valorizado_Presupuestario" ColumnName="Total_Valorizado_Presupuestario" />
+                <ScalarProperty Name="Valor_Total_No_Presupuestario" ColumnName="Valor_Total_No_Presupuestario" />
+                <ScalarProperty Name="Total_Valorizado_No_Presupuestario" ColumnName="Total_Valorizado_No_Presupuestario" />
+                <ScalarProperty Name="Valor_Total_Donacion" ColumnName="Valor_Total_Donacion" />
+                <ScalarProperty Name="Total_Valorizado_Donacion" ColumnName="Total_Valorizado_Donacion" />
+                <ScalarProperty Name="Valor_Total_Transferencia" ColumnName="Valor_Total_Transferencia" />
+                <ScalarProperty Name="Total_Valorizado_Transferencia" ColumnName="Total_Valorizado_Transferencia" />
+                <ScalarProperty Name="Valor_Total_General" ColumnName="Valor_Total_General" />
+                <ScalarProperty Name="Total_Valorizado_General" ColumnName="Total_Valorizado_General" />
+                <ScalarProperty Name="Año" ColumnName="Año" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spAltas_Detalladas_Obtener" FunctionName="SIGMAModel.Store.SIGMA_spAltas_Detalladas_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spAltas_Detalladas_Obtener_Result">
+                <ScalarProperty Name="NroLote" ColumnName="NroLote" />
+                <ScalarProperty Name="Fecha_Alta" ColumnName="Fecha_Alta" />
+                <ScalarProperty Name="Origen_Gasto" ColumnName="Origen_Gasto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Valor_Adquisicion" ColumnName="Valor_Adquisicion" />
+                <ScalarProperty Name="Total_Compra" ColumnName="Total_Compra" />
+                <ScalarProperty Name="Amortizacion_Acumulada" ColumnName="Amortizacion_Acumulada" />
+                <ScalarProperty Name="Valor_Actual" ColumnName="Valor_Actual" />
+                <ScalarProperty Name="NNE" ColumnName="NNE" />
+                <ScalarProperty Name="Desc_Proveedor" ColumnName="Desc_Proveedor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spAltas_Generales_Obtener" FunctionName="SIGMAModel.Store.SIGMA_spAltas_Generales_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spAltas_Generales_Obtener_Result">
+                <ScalarProperty Name="NroLote" ColumnName="NroLote" />
+                <ScalarProperty Name="Fecha_Alta" ColumnName="Fecha_Alta" />
+                <ScalarProperty Name="Id_Origen" ColumnName="Id_Origen" />
+                <ScalarProperty Name="Origen_Gasto" ColumnName="Origen_Gasto" />
+                <ScalarProperty Name="Documento_Compra" ColumnName="Documento_Compra" />
+                <ScalarProperty Name="Expediente_Compra" ColumnName="Expediente_Compra" />
+                <ScalarProperty Name="NNE" ColumnName="NNE" />
+                <ScalarProperty Name="Nomenclatura" ColumnName="Nomenclatura" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Total_Compra" ColumnName="Total_Compra" />
+                <ScalarProperty Name="Total_Valorizado" ColumnName="Total_Valorizado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spAltas_Totalizadas_Obtener" FunctionName="SIGMAModel.Store.SIGMA_spAltas_Totalizadas_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spAltas_Totalizadas_Obtener_Result">
+                <ScalarProperty Name="Año_Alta" ColumnName="Año_Alta" />
+                <ScalarProperty Name="Total_Altas_Presupuestarias" ColumnName="Total_Altas_Presupuestarias" />
+                <ScalarProperty Name="Total_Altas_No_Presupuestarias" ColumnName="Total_Altas_No_Presupuestarias" />
+                <ScalarProperty Name="Total_Altas_Donacion" ColumnName="Total_Altas_Donacion" />
+                <ScalarProperty Name="Total_Altas_Transferencia" ColumnName="Total_Altas_Transferencia" />
+                <ScalarProperty Name="Total_Altas_General" ColumnName="Total_Altas_General" />
+                <ScalarProperty Name="Total_Valorizado" ColumnName="Total_Valorizado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spAmortizaciones_Anuales_Obtener" FunctionName="SIGMAModel.Store.SIGMA_spAmortizaciones_Anuales_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spAmortizaciones_Anuales_Obtener_Result">
+                <ScalarProperty Name="NNE" ColumnName="NNE" />
+                <ScalarProperty Name="Nomenclatura" ColumnName="Nomenclatura" />
+                <ScalarProperty Name="NroLote" ColumnName="NroLote" />
+                <ScalarProperty Name="Fecha_Alta" ColumnName="Fecha_Alta" />
+                <ScalarProperty Name="Vida_Util" ColumnName="Vida_Util" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Valor_Compra" ColumnName="Valor_Compra" />
+                <ScalarProperty Name="Valor_Residual" ColumnName="Valor_Residual" />
+                <ScalarProperty Name="Año_Amortizacion" ColumnName="Año_Amortizacion" />
+                <ScalarProperty Name="Sigla_Destino" ColumnName="Sigla_Destino" />
+                <ScalarProperty Name="Cargo_Efecto" ColumnName="Cargo_Efecto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spDescargos_Valorizados_Obtener" FunctionName="SIGMAModel.Store.SIGMA_spDescargos_Valorizados_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spDescargos_Valorizados_Obtener_Result">
+                <ScalarProperty Name="NNE" ColumnName="NNE" />
+                <ScalarProperty Name="Nomenclatura" ColumnName="Nomenclatura" />
+                <ScalarProperty Name="NroLote" ColumnName="NroLote" />
+                <ScalarProperty Name="Fecha_Alta" ColumnName="Fecha_Alta" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Vida_Util" ColumnName="Vida_Util" />
+                <ScalarProperty Name="Valor_Adquisicion" ColumnName="Valor_Adquisicion" />
+                <ScalarProperty Name="Amortizacion_Acumulada" ColumnName="Amortizacion_Acumulada" />
+                <ScalarProperty Name="Valor_Actual" ColumnName="Valor_Actual" />
+                <ScalarProperty Name="Fecha_Descargo" ColumnName="Fecha_Descargo" />
+                <ScalarProperty Name="Sigla_Destino" ColumnName="Sigla_Destino" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spDespiece_Valorizado_Obtener" FunctionName="SIGMAModel.Store.SIGMA_spDespiece_Valorizado_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spDespiece_Valorizado_Obtener_Result">
+                <ScalarProperty Name="NNE_Primario" ColumnName="NNE_Primario" />
+                <ScalarProperty Name="NroSerie_Primario" ColumnName="NroSerie_Primario" />
+                <ScalarProperty Name="NroInven_Primario" ColumnName="NroInven_Primario" />
+                <ScalarProperty Name="NNE_Despiece" ColumnName="NNE_Despiece" />
+                <ScalarProperty Name="Nomenclatura" ColumnName="Nomenclatura" />
+                <ScalarProperty Name="NroLote" ColumnName="NroLote" />
+                <ScalarProperty Name="Fecha_Alta" ColumnName="Fecha_Alta" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Valor_Compra" ColumnName="Valor_Compra" />
+                <ScalarProperty Name="Vida_Util" ColumnName="Vida_Util" />
+                <ScalarProperty Name="Amortizacion_Acumulada" ColumnName="Amortizacion_Acumulada" />
+                <ScalarProperty Name="Valor_Actual" ColumnName="Valor_Actual" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spEfectos_Amortizados_Obtener" FunctionName="SIGMAModel.Store.SIGMA_spEfectos_Amortizados_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spEfectos_Amortizados_Obtener_Result">
+                <ScalarProperty Name="NNE" ColumnName="NNE" />
+                <ScalarProperty Name="Nomenclatura" ColumnName="Nomenclatura" />
+                <ScalarProperty Name="NroLote" ColumnName="NroLote" />
+                <ScalarProperty Name="Fecha_Alta" ColumnName="Fecha_Alta" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Valor_Adquisicion" ColumnName="Valor_Adquisicion" />
+                <ScalarProperty Name="Vida_Util" ColumnName="Vida_Util" />
+                <ScalarProperty Name="Amortizacion_Acumulada" ColumnName="Amortizacion_Acumulada" />
+                <ScalarProperty Name="Valor_Residual" ColumnName="Valor_Residual" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spInventario_Valorizado_Obtener" FunctionName="SIGMAModel.Store.SIGMA_spInventario_Valorizado_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spInventario_Valorizado_Obtener_Result">
+                <ScalarProperty Name="Id_Inventario" ColumnName="Id_Inventario" />
+                <ScalarProperty Name="Año_Alta" ColumnName="Año_Alta" />
+                <ScalarProperty Name="NroLote" ColumnName="NroLote" />
+                <ScalarProperty Name="NNE" ColumnName="NNE" />
+                <ScalarProperty Name="Nomenclatura" ColumnName="Nomenclatura" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Valor_Adquisicion" ColumnName="Valor_Adquisicion" />
+                <ScalarProperty Name="Amortizacion_Acumulada" ColumnName="Amortizacion_Acumulada" />
+                <ScalarProperty Name="Valor_Actualizado" ColumnName="Valor_Actualizado" />
+                <ScalarProperty Name="Año_Amortizacion" ColumnName="Año_Amortizacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spLotes_Destino_Obtener" FunctionName="SIGMAModel.Store.SIGMA_spLotes_Destino_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spLotes_Destino_Obtener_Result">
+                <ScalarProperty Name="Sigla_Destino" ColumnName="Sigla_Destino" />
+                <ScalarProperty Name="Valor_Total_Presupuestario" ColumnName="Valor_Total_Presupuestario" />
+                <ScalarProperty Name="Total_Valorizado_Presupuestario" ColumnName="Total_Valorizado_Presupuestario" />
+                <ScalarProperty Name="Valor_Total_No_Presupuestario" ColumnName="Valor_Total_No_Presupuestario" />
+                <ScalarProperty Name="Total_Valorizado_No_Presupuestario" ColumnName="Total_Valorizado_No_Presupuestario" />
+                <ScalarProperty Name="Valor_Total_Donacion" ColumnName="Valor_Total_Donacion" />
+                <ScalarProperty Name="Total_Valorizado_Donacion" ColumnName="Total_Valorizado_Donacion" />
+                <ScalarProperty Name="Valor_Total_Transferencia" ColumnName="Valor_Total_Transferencia" />
+                <ScalarProperty Name="Total_Valorizado_Transferencia" ColumnName="Total_Valorizado_Transferencia" />
+                <ScalarProperty Name="Valor_Total_General" ColumnName="Valor_Total_General" />
+                <ScalarProperty Name="Total_Valorizado_General" ColumnName="Total_Valorizado_General" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spLotes_Inventario_Obtener" FunctionName="SIGMAModel.Store.SIGMA_spLotes_Inventario_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spLotes_Inventario_Obtener_Result">
+                <ScalarProperty Name="Cod_Inventario" ColumnName="Cod_Inventario" />
+                <ScalarProperty Name="Des_Inventario" ColumnName="Des_Inventario" />
+                <ScalarProperty Name="Valor_Total_Presupuestario" ColumnName="Valor_Total_Presupuestario" />
+                <ScalarProperty Name="Total_Valorizado_Presupuestario" ColumnName="Total_Valorizado_Presupuestario" />
+                <ScalarProperty Name="Valor_Total_No_Presupuestario" ColumnName="Valor_Total_No_Presupuestario" />
+                <ScalarProperty Name="Total_Valorizado_No_Presupuestario" ColumnName="Total_Valorizado_No_Presupuestario" />
+                <ScalarProperty Name="Valor_Total_Donacion" ColumnName="Valor_Total_Donacion" />
+                <ScalarProperty Name="Total_Valorizado_Donacion" ColumnName="Total_Valorizado_Donacion" />
+                <ScalarProperty Name="Valor_Total_Transferencia" ColumnName="Valor_Total_Transferencia" />
+                <ScalarProperty Name="Total_Valorizado_Transferencia" ColumnName="Total_Valorizado_Transferencia" />
+                <ScalarProperty Name="Valor_Total_General" ColumnName="Valor_Total_General" />
+                <ScalarProperty Name="Total_Valorizado_General" ColumnName="Total_Valorizado_General" />
+                <ScalarProperty Name="Id_Inventario" ColumnName="Id_Inventario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spTotales_Cargo_Destino_Obtener" FunctionName="SIGMAModel.Store.SIGMA_spTotales_Cargo_Destino_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spTotales_Cargo_Destino_Obtener_Result">
+                <ScalarProperty Name="Sigla" ColumnName="Sigla" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Cargo_Destino" ColumnName="Cargo_Destino" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Valor_Total" ColumnName="Valor_Total" />
+                <ScalarProperty Name="Total_Valorizado" ColumnName="Total_Valorizado" />
+                <ScalarProperty Name="Amortizacion_Acumulada" ColumnName="Amortizacion_Acumulada" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spTotales_Cargo_Efecto_Obtener" FunctionName="SIGMAModel.Store.SIGMA_spTotales_Cargo_Efecto_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spTotales_Cargo_Efecto_Obtener_Result">
+                <ScalarProperty Name="Cod_Cargo_Efecto" ColumnName="Cod_Cargo_Efecto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Total_Cargo_Efecto" ColumnName="Total_Cargo_Efecto" />
+                <ScalarProperty Name="Total_Valorizado" ColumnName="Total_Valorizado" />
+                <ScalarProperty Name="Total_Amortizado" ColumnName="Total_Amortizado" />
+                <ScalarProperty Name="Sigla_Destino" ColumnName="Sigla_Destino" />
+                <ScalarProperty Name="Cod_CargoDestino" ColumnName="Cod_CargoDestino" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spTotales_Destino_Obtener" FunctionName="SIGMAModel.Store.SIGMA_spTotales_Destino_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spTotales_Destino_Obtener_Result">
+                <ScalarProperty Name="Sigla" ColumnName="Sigla" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Valor_Total" ColumnName="Valor_Total" />
+                <ScalarProperty Name="Amortizacion_Acumulada" ColumnName="Amortizacion_Acumulada" />
+                <ScalarProperty Name="Total_Valorizado" ColumnName="Total_Valorizado" />
+                <ScalarProperty Name="Zona_Naval" ColumnName="Zona_Naval" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spTotales_Efecto_Obtener" FunctionName="SIGMAModel.Store.SIGMA_spTotales_Efecto_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spTotales_Efecto_Obtener_Result">
+                <ScalarProperty Name="NNE" ColumnName="NNE" />
+                <ScalarProperty Name="Nomenclatura" ColumnName="Nomenclatura" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Total_Efecto" ColumnName="Total_Efecto" />
+                <ScalarProperty Name="Total_Valorizado" ColumnName="Total_Valorizado" />
+                <ScalarProperty Name="Total_Amortizado" ColumnName="Total_Amortizado" />
+                <ScalarProperty Name="Cargo_Efecto" ColumnName="Cargo_Efecto" />
+                <ScalarProperty Name="Sigla_Destino" ColumnName="Sigla_Destino" />
+                <ScalarProperty Name="Cod_CargoDestino" ColumnName="Cod_CargoDestino" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spValorizacion_Detallada_Obtener" FunctionName="SIGMAModel.Store.SIGMA_spValorizacion_Detallada_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spValorizacion_Detallada_Obtener_Result">
+                <ScalarProperty Name="NNE" ColumnName="NNE" />
+                <ScalarProperty Name="NroLote" ColumnName="NroLote" />
+                <ScalarProperty Name="Fecha_Alta" ColumnName="Fecha_Alta" />
+                <ScalarProperty Name="Nro_Serie" ColumnName="Nro_Serie" />
+                <ScalarProperty Name="Nro_Inventario" ColumnName="Nro_Inventario" />
+                <ScalarProperty Name="Precio_Compra" ColumnName="Precio_Compra" />
+                <ScalarProperty Name="Amortizacion_Acumulada" ColumnName="Amortizacion_Acumulada" />
+                <ScalarProperty Name="Valor_Actual" ColumnName="Valor_Actual" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Sigla_Destino" ColumnName="Sigla_Destino" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spAltas_Anuales_Obtener_FX" FunctionName="SIGMAModel.Store.SIGMA_spAltas_Anuales_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spAltas_Anuales_Obtener_Result">
+                <ScalarProperty Name="Valor_Total_Presupuestario" ColumnName="Valor_Total_Presupuestario" />
+                <ScalarProperty Name="Total_Valorizado_Presupuestario" ColumnName="Total_Valorizado_Presupuestario" />
+                <ScalarProperty Name="Valor_Total_No_Presupuestario" ColumnName="Valor_Total_No_Presupuestario" />
+                <ScalarProperty Name="Total_Valorizado_No_Presupuestario" ColumnName="Total_Valorizado_No_Presupuestario" />
+                <ScalarProperty Name="Valor_Total_Donacion" ColumnName="Valor_Total_Donacion" />
+                <ScalarProperty Name="Total_Valorizado_Donacion" ColumnName="Total_Valorizado_Donacion" />
+                <ScalarProperty Name="Valor_Total_Transferencia" ColumnName="Valor_Total_Transferencia" />
+                <ScalarProperty Name="Total_Valorizado_Transferencia" ColumnName="Total_Valorizado_Transferencia" />
+                <ScalarProperty Name="Valor_Total_General" ColumnName="Valor_Total_General" />
+                <ScalarProperty Name="Total_Valorizado_General" ColumnName="Total_Valorizado_General" />
+                <ScalarProperty Name="Año" ColumnName="Año" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spAltas_Detalladas_Obtener_FX" FunctionName="SIGMAModel.Store.SIGMA_spAltas_Detalladas_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spAltas_Detalladas_Obtener_Result">
+                <ScalarProperty Name="NroLote" ColumnName="NroLote" />
+                <ScalarProperty Name="Fecha_Alta" ColumnName="Fecha_Alta" />
+                <ScalarProperty Name="Origen_Gasto" ColumnName="Origen_Gasto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Valor_Adquisicion" ColumnName="Valor_Adquisicion" />
+                <ScalarProperty Name="Total_Compra" ColumnName="Total_Compra" />
+                <ScalarProperty Name="Amortizacion_Acumulada" ColumnName="Amortizacion_Acumulada" />
+                <ScalarProperty Name="Valor_Actual" ColumnName="Valor_Actual" />
+                <ScalarProperty Name="NNE" ColumnName="NNE" />
+                <ScalarProperty Name="Desc_Proveedor" ColumnName="Desc_Proveedor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spAltas_Generales_Obtener_FX" FunctionName="SIGMAModel.Store.SIGMA_spAltas_Generales_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spAltas_Generales_Obtener_Result">
+                <ScalarProperty Name="NroLote" ColumnName="NroLote" />
+                <ScalarProperty Name="Fecha_Alta" ColumnName="Fecha_Alta" />
+                <ScalarProperty Name="Id_Origen" ColumnName="Id_Origen" />
+                <ScalarProperty Name="Origen_Gasto" ColumnName="Origen_Gasto" />
+                <ScalarProperty Name="Documento_Compra" ColumnName="Documento_Compra" />
+                <ScalarProperty Name="Expediente_Compra" ColumnName="Expediente_Compra" />
+                <ScalarProperty Name="NNE" ColumnName="NNE" />
+                <ScalarProperty Name="Nomenclatura" ColumnName="Nomenclatura" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Total_Compra" ColumnName="Total_Compra" />
+                <ScalarProperty Name="Total_Valorizado" ColumnName="Total_Valorizado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spAltas_Totalizadas_Obtener_FX" FunctionName="SIGMAModel.Store.SIGMA_spAltas_Totalizadas_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spAltas_Totalizadas_Obtener_Result">
+                <ScalarProperty Name="Año_Alta" ColumnName="Año_Alta" />
+                <ScalarProperty Name="Total_Altas_Presupuestarias" ColumnName="Total_Altas_Presupuestarias" />
+                <ScalarProperty Name="Total_Altas_No_Presupuestarias" ColumnName="Total_Altas_No_Presupuestarias" />
+                <ScalarProperty Name="Total_Altas_Donacion" ColumnName="Total_Altas_Donacion" />
+                <ScalarProperty Name="Total_Altas_Transferencia" ColumnName="Total_Altas_Transferencia" />
+                <ScalarProperty Name="Total_Altas_General" ColumnName="Total_Altas_General" />
+                <ScalarProperty Name="Total_Valorizado" ColumnName="Total_Valorizado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spAmortizaciones_Anuales_Obtener_FX" FunctionName="SIGMAModel.Store.SIGMA_spAmortizaciones_Anuales_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spAmortizaciones_Anuales_Obtener_Result">
+                <ScalarProperty Name="NNE" ColumnName="NNE" />
+                <ScalarProperty Name="Nomenclatura" ColumnName="Nomenclatura" />
+                <ScalarProperty Name="NroLote" ColumnName="NroLote" />
+                <ScalarProperty Name="Fecha_Alta" ColumnName="Fecha_Alta" />
+                <ScalarProperty Name="Vida_Util" ColumnName="Vida_Util" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Valor_Compra" ColumnName="Valor_Compra" />
+                <ScalarProperty Name="Valor_Residual" ColumnName="Valor_Residual" />
+                <ScalarProperty Name="Año_Amortizacion" ColumnName="Año_Amortizacion" />
+                <ScalarProperty Name="Sigla_Destino" ColumnName="Sigla_Destino" />
+                <ScalarProperty Name="Cargo_Efecto" ColumnName="Cargo_Efecto" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spDescargos_Valorizados_Obtener_FX" FunctionName="SIGMAModel.Store.SIGMA_spDescargos_Valorizados_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spDescargos_Valorizados_Obtener_Result">
+                <ScalarProperty Name="NNE" ColumnName="NNE" />
+                <ScalarProperty Name="Nomenclatura" ColumnName="Nomenclatura" />
+                <ScalarProperty Name="NroLote" ColumnName="NroLote" />
+                <ScalarProperty Name="Fecha_Alta" ColumnName="Fecha_Alta" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Vida_Util" ColumnName="Vida_Util" />
+                <ScalarProperty Name="Valor_Adquisicion" ColumnName="Valor_Adquisicion" />
+                <ScalarProperty Name="Amortizacion_Acumulada" ColumnName="Amortizacion_Acumulada" />
+                <ScalarProperty Name="Valor_Actual" ColumnName="Valor_Actual" />
+                <ScalarProperty Name="Fecha_Descargo" ColumnName="Fecha_Descargo" />
+                <ScalarProperty Name="Sigla_Destino" ColumnName="Sigla_Destino" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spDespiece_Valorizado_Obtener_FX" FunctionName="SIGMAModel.Store.SIGMA_spDespiece_Valorizado_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spDespiece_Valorizado_Obtener_Result">
+                <ScalarProperty Name="NNE_Primario" ColumnName="NNE_Primario" />
+                <ScalarProperty Name="NroSerie_Primario" ColumnName="NroSerie_Primario" />
+                <ScalarProperty Name="NroInven_Primario" ColumnName="NroInven_Primario" />
+                <ScalarProperty Name="NNE_Despiece" ColumnName="NNE_Despiece" />
+                <ScalarProperty Name="Nomenclatura" ColumnName="Nomenclatura" />
+                <ScalarProperty Name="NroLote" ColumnName="NroLote" />
+                <ScalarProperty Name="Fecha_Alta" ColumnName="Fecha_Alta" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Valor_Compra" ColumnName="Valor_Compra" />
+                <ScalarProperty Name="Vida_Util" ColumnName="Vida_Util" />
+                <ScalarProperty Name="Amortizacion_Acumulada" ColumnName="Amortizacion_Acumulada" />
+                <ScalarProperty Name="Valor_Actual" ColumnName="Valor_Actual" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spEfectos_Amortizados_Obtener_FX" FunctionName="SIGMAModel.Store.SIGMA_spEfectos_Amortizados_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spEfectos_Amortizados_Obtener_Result">
+                <ScalarProperty Name="NNE" ColumnName="NNE" />
+                <ScalarProperty Name="Nomenclatura" ColumnName="Nomenclatura" />
+                <ScalarProperty Name="NroLote" ColumnName="NroLote" />
+                <ScalarProperty Name="Fecha_Alta" ColumnName="Fecha_Alta" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Valor_Adquisicion" ColumnName="Valor_Adquisicion" />
+                <ScalarProperty Name="Vida_Util" ColumnName="Vida_Util" />
+                <ScalarProperty Name="Amortizacion_Acumulada" ColumnName="Amortizacion_Acumulada" />
+                <ScalarProperty Name="Valor_Residual" ColumnName="Valor_Residual" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spInventario_Valorizado_Obtener_FX" FunctionName="SIGMAModel.Store.SIGMA_spInventario_Valorizado_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spInventario_Valorizado_Obtener_Result">
+                <ScalarProperty Name="Id_Inventario" ColumnName="Id_Inventario" />
+                <ScalarProperty Name="Año_Alta" ColumnName="Año_Alta" />
+                <ScalarProperty Name="NroLote" ColumnName="NroLote" />
+                <ScalarProperty Name="NNE" ColumnName="NNE" />
+                <ScalarProperty Name="Nomenclatura" ColumnName="Nomenclatura" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Valor_Adquisicion" ColumnName="Valor_Adquisicion" />
+                <ScalarProperty Name="Amortizacion_Acumulada" ColumnName="Amortizacion_Acumulada" />
+                <ScalarProperty Name="Valor_Actualizado" ColumnName="Valor_Actualizado" />
+                <ScalarProperty Name="Año_Amortizacion" ColumnName="Año_Amortizacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spLotes_Destino_Obtener_FX" FunctionName="SIGMAModel.Store.SIGMA_spLotes_Destino_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spLotes_Destino_Obtener_Result">
+                <ScalarProperty Name="Sigla_Destino" ColumnName="Sigla_Destino" />
+                <ScalarProperty Name="Valor_Total_Presupuestario" ColumnName="Valor_Total_Presupuestario" />
+                <ScalarProperty Name="Total_Valorizado_Presupuestario" ColumnName="Total_Valorizado_Presupuestario" />
+                <ScalarProperty Name="Valor_Total_No_Presupuestario" ColumnName="Valor_Total_No_Presupuestario" />
+                <ScalarProperty Name="Total_Valorizado_No_Presupuestario" ColumnName="Total_Valorizado_No_Presupuestario" />
+                <ScalarProperty Name="Valor_Total_Donacion" ColumnName="Valor_Total_Donacion" />
+                <ScalarProperty Name="Total_Valorizado_Donacion" ColumnName="Total_Valorizado_Donacion" />
+                <ScalarProperty Name="Valor_Total_Transferencia" ColumnName="Valor_Total_Transferencia" />
+                <ScalarProperty Name="Total_Valorizado_Transferencia" ColumnName="Total_Valorizado_Transferencia" />
+                <ScalarProperty Name="Valor_Total_General" ColumnName="Valor_Total_General" />
+                <ScalarProperty Name="Total_Valorizado_General" ColumnName="Total_Valorizado_General" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spLotes_Inventario_Obtener_FX" FunctionName="SIGMAModel.Store.SIGMA_spLotes_Inventario_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spLotes_Inventario_Obtener_Result">
+                <ScalarProperty Name="Cod_Inventario" ColumnName="Cod_Inventario" />
+                <ScalarProperty Name="Des_Inventario" ColumnName="Des_Inventario" />
+                <ScalarProperty Name="Valor_Total_Presupuestario" ColumnName="Valor_Total_Presupuestario" />
+                <ScalarProperty Name="Total_Valorizado_Presupuestario" ColumnName="Total_Valorizado_Presupuestario" />
+                <ScalarProperty Name="Valor_Total_No_Presupuestario" ColumnName="Valor_Total_No_Presupuestario" />
+                <ScalarProperty Name="Total_Valorizado_No_Presupuestario" ColumnName="Total_Valorizado_No_Presupuestario" />
+                <ScalarProperty Name="Valor_Total_Donacion" ColumnName="Valor_Total_Donacion" />
+                <ScalarProperty Name="Total_Valorizado_Donacion" ColumnName="Total_Valorizado_Donacion" />
+                <ScalarProperty Name="Valor_Total_Transferencia" ColumnName="Valor_Total_Transferencia" />
+                <ScalarProperty Name="Total_Valorizado_Transferencia" ColumnName="Total_Valorizado_Transferencia" />
+                <ScalarProperty Name="Valor_Total_General" ColumnName="Valor_Total_General" />
+                <ScalarProperty Name="Total_Valorizado_General" ColumnName="Total_Valorizado_General" />
+                <ScalarProperty Name="Id_Inventario" ColumnName="Id_Inventario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spTotales_Cargo_Destino_Obtener_FX" FunctionName="SIGMAModel.Store.SIGMA_spTotales_Cargo_Destino_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spTotales_Cargo_Destino_Obtener_Result">
+                <ScalarProperty Name="Sigla" ColumnName="Sigla" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Cargo_Destino" ColumnName="Cargo_Destino" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Valor_Total" ColumnName="Valor_Total" />
+                <ScalarProperty Name="Total_Valorizado" ColumnName="Total_Valorizado" />
+                <ScalarProperty Name="Amortizacion_Acumulada" ColumnName="Amortizacion_Acumulada" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spTotales_Cargo_Efecto_Obtener_FX" FunctionName="SIGMAModel.Store.SIGMA_spTotales_Cargo_Efecto_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spTotales_Cargo_Efecto_Obtener_Result">
+                <ScalarProperty Name="Cod_Cargo_Efecto" ColumnName="Cod_Cargo_Efecto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Total_Cargo_Efecto" ColumnName="Total_Cargo_Efecto" />
+                <ScalarProperty Name="Total_Valorizado" ColumnName="Total_Valorizado" />
+                <ScalarProperty Name="Total_Amortizado" ColumnName="Total_Amortizado" />
+                <ScalarProperty Name="Sigla_Destino" ColumnName="Sigla_Destino" />
+                <ScalarProperty Name="Cod_CargoDestino" ColumnName="Cod_CargoDestino" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spTotales_Destino_Obtener_FX" FunctionName="SIGMAModel.Store.SIGMA_spTotales_Destino_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spTotales_Destino_Obtener_Result">
+                <ScalarProperty Name="Sigla" ColumnName="Sigla" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Valor_Total" ColumnName="Valor_Total" />
+                <ScalarProperty Name="Amortizacion_Acumulada" ColumnName="Amortizacion_Acumulada" />
+                <ScalarProperty Name="Total_Valorizado" ColumnName="Total_Valorizado" />
+                <ScalarProperty Name="Zona_Naval" ColumnName="Zona_Naval" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spTotales_Efecto_Obtener_FX" FunctionName="SIGMAModel.Store.SIGMA_spTotales_Efecto_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spTotales_Efecto_Obtener_Result">
+                <ScalarProperty Name="NNE" ColumnName="NNE" />
+                <ScalarProperty Name="Nomenclatura" ColumnName="Nomenclatura" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Total_Efecto" ColumnName="Total_Efecto" />
+                <ScalarProperty Name="Total_Valorizado" ColumnName="Total_Valorizado" />
+                <ScalarProperty Name="Total_Amortizado" ColumnName="Total_Amortizado" />
+                <ScalarProperty Name="Cargo_Efecto" ColumnName="Cargo_Efecto" />
+                <ScalarProperty Name="Sigla_Destino" ColumnName="Sigla_Destino" />
+                <ScalarProperty Name="Cod_CargoDestino" ColumnName="Cod_CargoDestino" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SIGMA_spValorizacion_Detallada_Obtener_FX" FunctionName="SIGMAModel.Store.SIGMA_spValorizacion_Detallada_Obtener">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIGMAModel.SIGMA_spValorizacion_Detallada_Obtener_Result">
+                <ScalarProperty Name="NNE" ColumnName="NNE" />
+                <ScalarProperty Name="NroLote" ColumnName="NroLote" />
+                <ScalarProperty Name="Fecha_Alta" ColumnName="Fecha_Alta" />
+                <ScalarProperty Name="Nro_Serie" ColumnName="Nro_Serie" />
+                <ScalarProperty Name="Nro_Inventario" ColumnName="Nro_Inventario" />
+                <ScalarProperty Name="Precio_Compra" ColumnName="Precio_Compra" />
+                <ScalarProperty Name="Amortizacion_Acumulada" ColumnName="Amortizacion_Acumulada" />
+                <ScalarProperty Name="Valor_Actual" ColumnName="Valor_Actual" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Sigla_Destino" ColumnName="Sigla_Destino" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

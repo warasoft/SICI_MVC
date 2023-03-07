@@ -1,0 +1,142 @@
+﻿@model SICI_MVC.Models.SIGMA.Valorizacion_Detallada_Pagina
+
+@{
+    ViewBag.Title = "Valorizacion Detallada";
+}
+
+<p></p>
+
+@using (Html.BeginForm("Valorizacion_Detallada", "Home", FormMethod.Post))
+{
+<div class="panel panel-default">
+    <div class="panel-heading text-center">
+        <strong>VALORIZACION DETALLADA DE EFECTOS POR NRO.DE LOTE Y DESTINO</strong>
+    </div>
+    <div class="panel-body" style="text-align:center">
+        <div class="form-inline">
+            @Html.Label("NNE: ")
+            @Html.TextBox("txtNNE", "", new { @class = "form-control", @maxLength = "13", @style = "width:200px;" })
+            @Html.Label("     ")
+            @Html.Label("NRO LOTE: ")
+            @Html.TextBox("txtNROLOTE", "", new { @class = "form-control", @maxLength = "11", @style = "width:120px;" })
+            @Html.Label("     ")
+            @Html.Label("SIGLA: ")
+            @Html.TextBox("txtSIGLA", "", new { @class = "form-control", @maxLength = "4", @style = "width:80px;" })
+            <button type="submit" class="btn btn-info">Buscar</button>
+        </div>
+    </div>
+</div>
+}
+
+@if (Model.Valorizacion_Detallada != null)
+{
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th class="text-center">
+            @Html.DisplayName("NUMERO")
+            <br />
+            @Html.DisplayName("LOTE")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("FECHA")
+            <br />
+            @Html.DisplayName("ALTA")
+        </th>>
+        <th class="text-center">
+            @Html.DisplayName("NUMERO")
+            <br />
+            @Html.DisplayName("SERIE")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("NUMERO")
+            <br />
+            @Html.DisplayName("INVENTARIO")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("PRECIO")
+            <br />
+            @Html.DisplayName("COMPRA")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("AMORTIZAC")
+            <br />
+            @Html.DisplayName("ACUMULADA")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("VALOR")
+            <br />
+            @Html.DisplayName("ACTUAL")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("ESTADO")
+            <br />
+            @Html.DisplayName("ACTUAL")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("SIGLA")
+            <br />
+            @Html.DisplayName("DESTINO")
+        </th>
+    </tr>
+
+    @for (int i = 0; i < Model.Valorizacion_Detallada.Count; i++)
+    {
+        <tr>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Valorizacion_Detallada[i].NroLote)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Valorizacion_Detallada[i].Fecha_Alta)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Valorizacion_Detallada[i].Nro_Serie)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Valorizacion_Detallada[i].Nro_Inventario)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Valorizacion_Detallada[i].Precio_Compra)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Valorizacion_Detallada[i].Amortizacion_Acumulada)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Valorizacion_Detallada[i].Valor_Actual)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Valorizacion_Detallada[i].Estado)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Valorizacion_Detallada[i].Sigla_Destino)
+            </td>
+        </tr>
+    }
+
+</table>
+
+    if (Model.Valorizacion_Detallada.Count > 0)
+    {
+        Html.RenderPartial("_paginador", Model);
+    }
+}
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success text-center">
+        <strong>@ViewBag.Mensaje</strong>
+    </div>
+}
+
+@if (ViewBag.Resultado != null)
+{
+    <div class="alert alert-info text-center">
+        <strong>@ViewBag.Resultado</strong>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-warning text-center">
+        <strong>@ViewBag.Error</strong>
+    </div>
+}

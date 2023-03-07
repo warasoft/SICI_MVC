@@ -1,0 +1,161 @@
+﻿@model SICI_MVC.Models.SIGMA.Amortizaciones_Anuales_Pagina
+
+@{
+    ViewBag.Title = "Amortizaciones Anuales";
+}
+
+<p></p>
+
+@using (Html.BeginForm("Amortizaciones_Anuales", "Home", FormMethod.Post))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading text-center">
+            <strong>AMORTIZACIONES ANUALES DE EFECTOS EN UN RANGO DE FECHAS DE ALTA</strong>
+        </div>
+        <div class="panel-body" style="text-align:center">
+            <div class="form-inline">
+                @Html.Label("DESDE: ")
+                @Html.TextBox("txtFECHA_DESDE", "", new { @class = "form-control date-picker", @maxLength = "10", @type = "date", @style = "width:180px;" })
+                @Html.Label("     ")
+                @Html.Label("HASTA: ")
+                @Html.TextBox("txtFECHA_HASTA", "", new { @class = "form-control date-picker", @type = "date", @maxLength = "10", @style = "width:180px;" })
+                @Html.Label("     ")
+                @Html.Label("NRO LOTE: ")
+                @Html.TextBox("txtNROLOTE", "", new { @class = "form-control", @maxLength = "11", @style = "width:150px;" })
+                @Html.Label("     ")
+                @Html.Label("NNE: ")
+                @Html.TextBox("txtNNE", "", new { @class = "form-control", @maxLength = "13", @style = "width:150px;" })
+                <button type="submit" class="btn btn-info">Buscar</button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model.Amortizaciones_Anuales != null)
+{
+<table class="table table-bordered table-striped table-hover">
+    <tr>
+        <th class="text-center">
+            @Html.DisplayName("NNE")
+            <br />
+            @Html.DisplayName("EFECTO")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("NOMENCLATURA")
+            <br />
+            @Html.DisplayName("EFECTO")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("NUMERO")
+            <br />
+            @Html.DisplayName("LOTE")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("FECHA")
+            <br />
+            @Html.DisplayName("ALTA")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("VIDA")
+            <br />
+            @Html.DisplayName("UTIL")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("CANT")
+            <br />
+            @Html.DisplayName("TOTAL")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("VALOR")
+            <br />
+            @Html.DisplayName("COMPRA")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("VALOR")
+            <br />
+            @Html.DisplayName("RESIDUAL")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("AÑO")
+            <br />
+            @Html.DisplayName("AMORTIZA")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("SIGLA")
+            <br />
+            @Html.DisplayName("DESTINO")
+        </th>
+        <th class="text-center">
+            @Html.DisplayName("CARGO")
+            <br />
+            @Html.DisplayName("EFECTO")
+        </th>
+    </tr>
+
+    @for (int i = 0; i < Model.Amortizaciones_Anuales.Count; i++)
+    {
+        <tr>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Amortizaciones_Anuales[i].NNE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Amortizaciones_Anuales[i].Nomenclatura)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Amortizaciones_Anuales[i].NroLote)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Amortizaciones_Anuales[i].Fecha_Alta)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Amortizaciones_Anuales[i].Vida_Util)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Amortizaciones_Anuales[i].Cantidad)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Amortizaciones_Anuales[i].Valor_Compra)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Amortizaciones_Anuales[i].Valor_Residual)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Amortizaciones_Anuales[i].Año_Amortizacion)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Amortizaciones_Anuales[i].Sigla_Destino)
+            </td>
+            <td class="text-center">
+                @Html.DisplayFor(modelItem => Model.Amortizaciones_Anuales[i].Cargo_Efecto)
+            </td>
+        </tr>
+    }
+
+</table>
+
+    if (Model.Amortizaciones_Anuales.Count > 0)
+    {
+        Html.RenderPartial("_paginador", Model);
+    }
+}
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success text-center">
+        <strong>@ViewBag.Mensaje</strong>
+    </div>
+}
+
+@if (ViewBag.Resultado != null)
+{
+    <div class="alert alert-info text-center">
+        <strong>@ViewBag.Resultado</strong>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-warning text-center">
+        <strong>@ViewBag.Error</strong>
+    </div>
+}

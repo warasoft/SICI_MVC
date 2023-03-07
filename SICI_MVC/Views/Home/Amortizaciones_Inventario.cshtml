@@ -1,0 +1,115 @@
+﻿@model IEnumerable<SICI_MVC.Models.SICI_spAmortizaciones_Inventario_Obtener_Result>
+
+@{
+    ViewBag.Title = "Amortizaciones Inventario";
+}
+
+<p></p>
+
+@using (Html.BeginForm("Amortizaciones_Inventario", "Home", FormMethod.Post))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading text-center">
+            <strong>VALOR TOTAL DE LAS AMORTIZACIONES DE LOS INVENTARIOS DE LA ARMADA ARGENTINA</strong>
+        </div>
+        <div class="panel-body" style="text-align:center">
+            <div class="form-inline">
+                @Html.Label("AÑO de ALTA: ")
+                @Html.TextBox("txtAÑO", "", new { @class = "form-control", @type = "number", @style = "width:100px;" })
+                <button type="submit" class="btn btn-info">Buscar</button>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model != null)
+{
+    <table class="table table-bordered table-striped table-hover">
+        <tr>
+            <th class="text-center">
+                @Html.DisplayName("SIGLA")
+                <br />
+                @Html.DisplayName("DESTINO")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("CODIGO")
+                <br />
+                @Html.DisplayName("DESTINO")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("DESCRIPCION")
+                <br />
+                @Html.DisplayName("INVENTARIO")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("TIPO")
+                <br />
+                @Html.DisplayName("BIEN")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("VALOR")
+                <br />
+                @Html.DisplayName("ORIGINAL")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("VALOR")
+                <br />
+                @Html.DisplayName("ACTUAL")
+            </th>
+            <th class="text-center">
+                @Html.DisplayName("TOTAL")
+                <br />
+                @Html.DisplayName("AMORTIZADO")
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Sigla_Destino)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Codigo_Destino)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Descripcion_Inventario)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Tipo_Bien)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Valor_Original)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Valor_Actual)
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Amortizacion_Acumulada)
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+@if (ViewBag.Mensaje != null)
+{
+    <div class="alert alert-success text-center">
+        <strong>@ViewBag.Mensaje</strong>
+    </div>
+}
+
+@if (ViewBag.Resultado != null)
+{
+    <div class="alert alert-info text-center">
+        <strong>@ViewBag.Resultado</strong>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-warning text-center">
+        <strong>@ViewBag.Error</strong>
+    </div>
+}
